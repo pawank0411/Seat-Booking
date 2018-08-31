@@ -1,0 +1,153 @@
+<resources>
+
+    <string name="app_name">SeatBooking</string>
+    <string name="Details">Enter Details !!</string>
+    <string name="PName">Passenger\'s Name</string>
+    <string name="EmpCode">Employee Code</string>
+    <string name="PhnNumber">Phone Number</string>
+    <string name="PsNum">Pass No.</string>
+    <string name="Opt">(Optional)</string>
+    <string name="Fullnam">Full Name</string>
+    <string name="confirmpassword">Confirm Password</string>
+
+    <string name="newuser">New User? Register Here.</string>
+    <string name="manifest_label_login">Login</string>
+    <string name="Save">Save Info..</string>
+    <string name="Tour1">Rawan-Hirmi-Raipur</string>
+    <string name="Tour2">Raipur-Hirmi-Rawan</string>
+    <string name="Tour3">Rawan-Bhatapara</string>
+    <string name="Tour4">Bhatapara-Rawan</string>
+    <string name="Tour5">Rawan-Hirmi-Bhatapara</string>
+    <string name="Tour6">Bhatapara-Hirmi-Rawan</string>
+    <string name="timing">Timings...</string>
+    <string name="Opt1">7:30am-8:00am-10:00am</string>
+    <string name="Opt2">9:30am-10:00am-12:00pm</string>
+    <string name="Opt3">2:30pm-3:00pm-5:00pm</string>
+    <string name="Opt4">5:00pm-5:30pm-7:30pm</string>
+    <string name="OK">OK</string>
+    <string name="timing1">Timings...</string>
+    <string name="Opt5">11:00am-1:00pm-1:30pm</string>
+    <string name="Opt6">2:00pm-4:00pm-4:30pm</string>
+    <string name="Opt7">5:30pm-7:30pm-8:00pm</string>
+    <string name="Opt8">8:00pm-10:00pm-10:30pm</string>
+    <string name="OK1">OK</string>
+    <string name="button2">Book...</string>
+    <string name="txt_seat_selected"></string>
+    <string name="CodeNum">Employee Code</string>
+    <string name="show">TIMING : 07:00am-08:00am</string>
+    <string name="show1">TIMING : 11:00am-12:00pm</string>
+    <string name="show2">TIMING : 03:30pm-4:00pm-5:00pm</string>
+    <string name="show3">TIMING : 8:30pm-9:30pm-10:00pm</string>
+    <string name="existinguser">Already Registered? Login Here.</string>
+    <string name="manifest_label_register">Sign Up</string>
+    <string name="hint_phone_number">Phone Number</string>
+    <string name="hint_verification_code">Verification Code</string>
+    <string name="status_code_sent">Code Sent</string>
+    <string name="status_verification_failed">Verification failed</string>
+    <string name="status_verification_succeeded">Verification succeeded</string>
+    <string name="status_sign_in_failed">Sign-in failed</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="start_phone_auth">Login</string>
+    <string name="verify_phone_auth">Verify</string>
+    <string name="resend_phone_auth">Resend</string>
+    <string name="signed_in">Logged in !</string>
+    <string name="signed_out">You are not logged in !</string>
+    <string name="instant_validation">(instant validation)</string>
+    <string name="login_enter_Phn_password">Please enter your login Employee Code and Password</string>
+    <string name="login_enter_phnnmber">Please enter your Employee Code</string>
+    <string name="login_enter_password">Please enter your Password</string>
+    <string name="login_details_invalid">Details does not belongs to any account</string>
+    <string name="login_email_password_invalid">Either Employee Code/Password is incorrect</string>
+    <string name="login_authentication_failed">Employee Code is already registered</string>
+    <string name="login_successful_login">You have successfully logged in</string>
+    <string name="login_email_notverified">Phone Number is not verified, check your inbox for confirmation</string>
+    <string name="login_email_not_found_in_device">We did not find any account with the given Employee Code in this device</string>
+    <string name="appstatus_no_connection">Please see to it that you have an active internet connection</string>
+    <string name="registration_all_fields_mandatory">All fields are mandatory to fill</string>
+    <string name="registration_enterPass">Please enter your Password"</string>
+    <string name="registration_enterRePass">Please re-enter your Password</string>
+    <string name="registration_enter_email">Please enter your Employee Code</string>
+    <string name="registration_pass_notmatch">The two passwords do not match</string>
+    <string name="registration_check_email_verify">Check your Email for verification</string>
+    <string name="registration_failed">Already this Employee Code is registered. Please use a different Employee Code</string>
+    <string name="registration_successful">You have successfully registered</string>
+    <string name="registration_email_collision">User with this Employee Code already exists.Please use a different Employee Code</string>
+    <string name="registration_error">Error </string>
+    <string name="registration_network_problem">Connection Problem</string>
+<string name="firebase_status_fmt">done</string>
+
+
+
+        <string name="label_google_sign_in">Firebase + Google Sign In</string>
+        <string name="desc_google_sign_in">Use a Google Sign In credential to authenticate with Firebase.</string>
+
+        <string name="label_facebook_login">Firebase + Facebook Login</string>
+        <string name="desc_facebook_login">Use a Facebook Login credential to authenticate with Firebase.</string>
+
+        <string name="label_twitter_login">Firebase + Twitter Login</string>
+        <string name="desc_twitter_login">Use a Twitter Login credential to authenticate with Firebase.</string>
+
+        <string name="label_emailpassword">Email/Password Authentication</string>
+        <string name="desc_emailpassword">Use an email and password to authenticate with Firebase.</string>
+
+        <string name="label_passwordless">Passwordless Authentication</string>
+        <string name="desc_passwordless">Use only an email to authenticate with Firebase.</string>
+
+        <string name="label_phone_auth">Phone Number Authentication</string>
+        <string name="desc_phone_auth">Use a phone number to authenticate with Firebase.</string>
+
+        <string name="label_anonymous_auth">Anonymous Authentication</string>
+        <string name="desc_anonymous_auth">Sign in anonymously and then later upgrade to a full Firebase Auth user.</string>
+
+        <string name="label_custom_auth">Custom Authentication</string>
+        <string name="desc_custom_auth">Use a custom token signed by your own server to authenticate with Firebase.</string>
+
+        <string name="label_firebase_ui">FirebaseUI Auth</string>
+        <string name="desc_firebase_ui">Use the FirebaseUI-Android library to authenticate with Firebase.</string>
+
+        <string name="hint_user_id">User ID</string>
+        <string name="get_custom_token">Get Token</string>
+        <string name="sign_in">Sign In</string>
+        <string name="create_account">Create Account</string>
+        <string name="send_link">Send Link</string>
+        <string name="sign_out">Sign Out</string>
+        <string name="verify_email">Verify Email</string>
+        <string name="disconnect">Disconnect</string>
+        <string name="loading">Loading…</string>
+        <string name="custom_token">Custom Token</string>
+        <string name="signed_in1">Signed In</string>
+        <string name="signed_out1">Signed Out</string>
+        <string name="token_null">Token: null</string>
+        <string name="hint_email">Email</string>
+        <string name="hint_password">Password</string>
+        <string name="desc_firebase_lockup">Firebase logo and name</string>
+        <string name="auth_failed1">Authentication failed</string>
+
+        <string name="firebase_user_management">Firebase User Management</string>
+
+        <string name="google_status_fmt">Google User: %s</string>
+        <string name="google_title_text">Sign In With Google..</string>
+
+        <string name="facebook_status_fmt">Facebook User: %s</string>
+        <string name="facebook_title_text">Facebook Login</string>
+
+        <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
+        <string name="emailpassword_title_text">Email and Password</string>
+
+        <string name="passwordless_status_fmt">Email User: %1$s (verified: %2$b)</string>
+        <string name="passwordless_title_text">Passwordless Sign In</string>
+        <string name="status_email_not_sent">Send link to your email to get started.</string>
+        <string name="status_email_sent">Link sent, check your email to continue.</string>
+        <string name="status_link_found">Link received, enter email to sign in.</string>
+
+        <string name="phone_title_text">Phone Number</string>
+
+        <string name="twitter_status_fmt">Twitter User: %s</string>
+        <string name="twitter_title_text">Twitter Login</string>
+
+        <string name="firebaseui_status_fmt">Firebase User: %s</string>
+        <string name="firebaseui_title_text">FirebaseUI Auth</string>
+
+        <string name="id_fmt">User ID: %s</string>
+        <string name="email_fmt">Email: %s</string>
+    </resources>

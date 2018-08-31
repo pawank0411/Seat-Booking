@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/timing1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="19dp"
+        android:text="@string/timing"
+        android:textSize="35dp" />
+
+    <Button
+        android:id="@+id/OK1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="71dp"
+        android:background="@drawable/buttonlayout"
+        android:textSize="30dp"
+        android:text="@string/OK" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:id="@+id/linearLayout">
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/Opt5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/radiobutton_selector"
+                android:textColor="@color/black_opacity_87"
+                android:textSize="20dp"
+                android:text="@string/Opt5">
+
+            </RadioButton>
+            <RadioButton
+                android:id="@+id/Opt6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="20dp"
+                android:textColor="@color/black_opacity_87"
+                android:button="@drawable/radiobutton_selector"
+                android:text="@string/Opt6">
+
+            </RadioButton>
+            <RadioButton
+                android:id="@+id/Opt7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/black_opacity_87"
+                android:button="@drawable/radiobutton_selector"
+                android:layout_marginTop="20dp"
+                android:text="@string/Opt7">
+
+            </RadioButton>
+
+            <RadioButton
+                android:id="@+id/Opt8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_opacity_87"
+                android:textSize="20dp"
+                android:button="@drawable/radiobutton_selector"
+                android:layout_marginTop="20dp"
+                android:text="@string/Opt8">
+
+            </RadioButton>
+
+        </RadioGroup>
+
+
+    </LinearLayout>
+</RelativeLayout>

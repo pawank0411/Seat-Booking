@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/Details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editText"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_centerHorizontal="true"
+        android:text="@string/Details"
+        android:textAlignment="center"
+        android:textColor="@color/black_opacity_87"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/PName"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+
+        android:background="@drawable/buttonlayout1"
+        android:layout_alignStart="@+id/PhnNumber"
+        android:layout_below="@+id/Details"
+        android:layout_marginTop="82dp"
+        android:ems="10"
+        android:hint="@string/Fullnam"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/EmpCode"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/Details"
+        android:layout_below="@+id/PsNum"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/buttonlayout1"
+        android:ems="10"
+        android:hint="@string/EmpCode"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/PhnNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/PsNum"
+        android:layout_below="@+id/PName"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/buttonlayout1"
+        android:ems="10"
+        android:hint="@string/PhnNumber"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/PsNum"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+
+        android:layout_alignStart="@+id/EmpCode"
+        android:layout_below="@+id/PhnNumber"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/buttonlayout1"
+        android:ems="10"
+        android:hint="@string/PsNum"
+        android:inputType="phone" />
+
+    <TextView
+        android:id="@+id/Opt"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_alignBaseline="@+id/PsNum"
+        android:layout_alignBottom="@+id/PsNum"
+        android:layout_alignEnd="@+id/PsNum"
+        android:text="@string/Opt"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/saveinfo"
+        android:layout_width="wrap_content"
+        android:background="@drawable/buttonlayout"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp"
+        android:text="@string/Save" />
+
+
+
+    <Button
+        android:id="@+id/button"
+        android:visibility="invisible"
+        android:background="@drawable/buttonlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="14dp"
+        android:text="Verify" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/PsNum"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-18dp"
+        android:ems="10"
+        android:visibility="invisible"
+        android:inputType="numberPassword" />
+
+
+</RelativeLayout>

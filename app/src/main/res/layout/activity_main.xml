@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:background="@color/black_opacity_87">
+
+    <Button
+        android:id="@+id/Tour1"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/buttonlayout"
+        android:onClick="Tour1"
+        android:text="@string/Tour1" />
+
+    <Button
+        android:id="@+id/Tour2"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/Tour1"
+        android:layout_below="@+id/Tour1"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/buttonlayout"
+        android:text="@string/Tour2" />
+
+    <Button
+        android:id="@+id/Tour3"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/Tour2"
+        android:layout_below="@+id/Tour2"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/buttonlayout"
+        android:text="@string/Tour3" />
+
+
+    <Button
+        android:id="@+id/Tour4"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/Tour3"
+        android:layout_below="@+id/Tour3"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/buttonlayout"
+        android:text="@string/Tour4" />
+
+
+    <Button
+        android:id="@+id/Tour5"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/Tour4"
+        android:layout_below="@+id/Tour4"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/buttonlayout"
+        android:text="@string/Tour5" />
+    <Button
+        android:id="@+id/Tour6"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/Tour5"
+        android:layout_below="@+id/Tour5"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/buttonlayout"
+        android:text="@string/Tour6" />
+
+</RelativeLayout>

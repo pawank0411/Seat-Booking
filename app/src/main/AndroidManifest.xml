@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.university.soa.bus">
+<uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SeatClass.SeatSelection" >
+        </activity>
+        <activity android:name=".SeatClass.SeatSelection1" >
+        </activity>
+        <activity android:name=".SeatClass.SeatSelection2" >
+        </activity>
+        <activity android:name=".SeatClass.SeatSelection3" >
+        </activity>
+        <activity android:name=".TestLogin.LoginRegistration" >
+        </activity>
+        <activity android:name=".RadioButton.checkbox" >
+        </activity>
+        <activity android:name=".RadioButton.checkbox1" >
+        </activity>
+        <activity android:name=".SeatClass.SeatSelection4" >
+        </activity>
+        <activity android:name=".SeatClass.SeatSelection5" >
+        </activity>
+
+        <activity android:name=".SeatClass.TourSelection" >
+        </activity>
+        <activity android:name=".book">
+        </activity>
+
+        <activity android:name=".SavedSeats" >
+        </activity>
+    </application>
+
+</manifest>
