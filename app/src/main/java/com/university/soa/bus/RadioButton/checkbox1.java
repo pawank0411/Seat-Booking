@@ -12,39 +12,42 @@ import android.widget.Button;
 import android.widget.RadioButton;
 
 import com.university.soa.bus.R;
-import com.university.soa.bus.SeatClass.SeatSelection4;
-import com.university.soa.bus.SeatClass.SeatSelection5;
+import com.university.soa.bus.SeatClass.SeatSelection;
 
 public class checkbox1 extends Activity {
-    /** Called when the activity is first created. */
+    RadioButton R1,R2,R3,R4;
+    Button B1;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timing2);
-        final RadioButton O5 = (RadioButton) findViewById(R.id.Opt5);
-        final RadioButton O6 = (RadioButton) findViewById(R.id.Opt6);
-        final RadioButton O7 = (RadioButton) findViewById(R.id.Opt7);
-        final RadioButton O8 = (RadioButton) findViewById(R.id.Opt8);
-
-
-        final Button go = (Button) findViewById(R.id.OK1);
-        go.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_timing);
+        R1 = (RadioButton) findViewById(R.id.Opt1);
+        R2 = (RadioButton) findViewById(R.id.Opt2);
+        R3 = (RadioButton) findViewById(R.id.Opt3);
+        R4= (RadioButton) findViewById(R.id.Opt4);
+        B1= (Button) findViewById(R.id.OK);
+        B1.setText(R.string.OK);
+        R1.setText(R.string.Opt5);
+        R2.setText(R.string.Opt6);
+        R3.setText(R.string.Opt7);
+        R4.setText(R.string.Opt8);
+        B1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (O5.isChecked()) {
-                    Intent Intents= new Intent(checkbox1.this, SeatSelection4.class); // <----- START "BEACHES" ACTIVITY
+                if (R1.isChecked()) {
+                    Intent Intents= new Intent(checkbox1.this, SeatSelection.class); // <----- START "BEACHES" ACTIVITY
                     startActivity(Intents);
                 }
-                else if (O6.isChecked()) {
-                    Intent Intentm = new Intent(getApplicationContext(), SeatSelection5.class); // <----- START "HIll STATIONS" ACTIVITY
+                else if (R2.isChecked()) {
+                    Intent Intentm = new Intent(getApplicationContext(), SeatSelection.class); // <----- START "HIll STATIONS" ACTIVITY
                     startActivityForResult(Intentm, 0);
                 }
-                else if (O7.isChecked()) {
-                    Intent Intentw = new Intent(getApplicationContext(), SeatSelection4.class); // <----- START "WILDLIFE" ACTIVITY
+                else if (R3.isChecked()) {
+                    Intent Intentw = new Intent(getApplicationContext(), SeatSelection.class); // <----- START "WILDLIFE" ACTIVITY
                     startActivityForResult(Intentw, 0);
                 }
-                else if (O8.isChecked()) {
-                    Intent Intenth = new Intent(getApplicationContext(), SeatSelection5.class); // <----- START "HISTORICAL MONUMENTS" ACTIVITY
+                else if (R4.isChecked()) {
+                    Intent Intenth = new Intent(getApplicationContext(), SeatSelection.class); // <----- START "HISTORICAL MONUMENTS" ACTIVITY
                     startActivityForResult(Intenth, 0);
                 }
             }

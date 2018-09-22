@@ -21,7 +21,7 @@
         android:id="@+id/show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/show"
+
         android:textSize="15dp"
         android:textColor="@color/black_opacity_87"/>
 
@@ -45,7 +45,7 @@
         android:layout_marginStart="11dp"
         android:layout_toEndOf="@+id/txt_seat_selected"
         android:textSize="20dp"
-        android:text="@string/button2" />
+        />
 
 </RelativeLayout>
 

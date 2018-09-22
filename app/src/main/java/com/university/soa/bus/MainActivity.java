@@ -1,44 +1,22 @@
 package com.university.soa.bus;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.Menu;
-import android.widget.Toolbar;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.university.soa.bus.SeatClass.TourSelection;
-import com.university.soa.bus.TestLogin.GoogleSignInActivity;
-import com.university.soa.bus.TestLogin.LoginRegistration;
-import com.university.soa.bus.TestLogin.SaveData;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Properties;
 
 import Models.AppStatus;
@@ -56,13 +34,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Properties prop;
         DatabaseReference ref;
         FirebaseDatabase Database;
+        LinearLayout ll;
+        TextView t1;
+        RelativeLayout Rl;
         //private ProgressBar progressBar;
         AppStatus appStatus;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_login);
-
+                t1=(TextView)findViewById(R.id.seat) ;
+                ll=(LinearLayout)findViewById(R.id.layout1);
+                Rl=(RelativeLayout)findViewById(R.id.home);
+                ll.setVisibility(View.VISIBLE);
+                t1.setVisibility(View.VISIBLE);
+                Rl.setVisibility(View.INVISIBLE);
                 prop=new Properties();
                // auth = FirebaseAuth.getInstance();
                 Database = FirebaseDatabase.getInstance();

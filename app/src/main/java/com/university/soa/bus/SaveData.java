@@ -1,4 +1,4 @@
-package com.university.soa.bus.TestLogin;
+package com.university.soa.bus;
 
 /**
  * Created by pkumar on 5/13/18.

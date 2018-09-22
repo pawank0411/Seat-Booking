@@ -24,15 +24,20 @@ import java.util.List;
 public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
 
     private static final int COLUMNS =5;
-    private TextView txtSeatSelected;
+   // private TextView txtSeatSelected;
     Button mBook;
+    TextView time;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         mBook=findViewById(R.id.button2);
-        txtSeatSelected = (TextView)findViewById(R.id.txt_seat_selected);
+        time=findViewById(R.id.show);
+      //  time.setText(R.string.show);
+        mBook.setText(R.string.button2);
+     //   txtSeatSelected = (TextView)findViewById(R.id.txt_seat_selected);
         List<AbstractItem> items = new ArrayList<>();
         for (int i=0; i<40; i++) {
 
