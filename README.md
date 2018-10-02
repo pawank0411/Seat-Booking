@@ -1,2 +1,2 @@
 # Seat-Booking
-## an app to book seats for busses
+An app to book seats for buses.
