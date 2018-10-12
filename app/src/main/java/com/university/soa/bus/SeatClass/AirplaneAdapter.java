@@ -10,15 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.university.soa.bus.R;
 import com.university.soa.bus.SeatClass.SelectableAdapter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
 
     private OnSeatSelected mOnSeatSelected;
+    Set<Integer> selected=new HashSet<Integer>();
 
     private static class EdgeViewHolder extends RecyclerView.ViewHolder {
 
@@ -100,41 +104,68 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
         if (type == AbstractItem.TYPE_CENTER) {
             final CenterItem item = (CenterItem) mItems.get(position);
             CenterViewHolder holder = (CenterViewHolder) viewHolder;
+            if(SeatSelection.positions.contains(String.valueOf(position)) && !selected.contains(position) ) {
+                item.setSelectable(false);
+                holder.imgSeatSelected.setVisibility(View.VISIBLE);
 
-
+            }
 
 
             holder.imgSeat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
-                    toggleSelection(position);
-
+                    if(item.isSelectable()) {
+                        toggleSelection(position);
+                        if (isSelected(position)) {
+                            SeatSelection.positions.add(String.valueOf(position));
+                            selected.add(position);
+                        } else if (SeatSelection.positions.contains(String.valueOf(position))) {
+                            SeatSelection.positions.remove(String.valueOf(position));
+                            selected.remove(position);
+                        }
+                    }
+                    else {
+                        Toast.makeText(mContext, "Seat already booked", Toast.LENGTH_SHORT).show();
+                    }
                     mOnSeatSelected.onSeatSelected(getSelectedItemCount());
                 }
             });
 
-            holder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
+
+            holder.imgSeatSelected.setVisibility(isSelected(position)||!item.isSelectable() ? View.VISIBLE : View.INVISIBLE);
 
         } else if (type == AbstractItem.TYPE_EDGE) {
             final EdgeItem item = (EdgeItem) mItems.get(position);
             EdgeViewHolder holder = (EdgeViewHolder) viewHolder;
+            if(SeatSelection.positions.contains(String.valueOf(position)) && !selected.contains(position) ) {
+                item.setSelectable(false);
+                holder.imgSeatSelected.setVisibility(View.VISIBLE);
 
+            }
 
 
             holder.imgSeat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(item.isSelectable()) {
+                        toggleSelection(position);
+                        if (isSelected(position)) {
+                            SeatSelection.positions.add(String.valueOf(position));
+                            selected.add(position);
+                        } else if (SeatSelection.positions.contains(String.valueOf(position))) {
+                            SeatSelection.positions.remove(String.valueOf(position));
+                            selected.remove(position);
+                        }
+                    }
+                    else {
+                        Toast.makeText(mContext, "Seat already booked", Toast.LENGTH_SHORT).show();
 
-                    toggleSelection(position);
+                    }
                     mOnSeatSelected.onSeatSelected(getSelectedItemCount());
-
-
                 }
             });
 
-            holder.imgSeatSelected.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
+            holder.imgSeatSelected.setVisibility(isSelected(position)||!item.isSelectable() ? View.VISIBLE : View.INVISIBLE);
 
         }
     }
