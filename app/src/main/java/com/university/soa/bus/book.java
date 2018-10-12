@@ -38,9 +38,7 @@ public class book extends AppCompatActivity {
         B3=(Button)findViewById(R.id.button8);
 
         Calendar c = Calendar.getInstance();
-        System.out.println("Current time => "+c.getTime());
         SimpleDateFormat df = new SimpleDateFormat("EEE, MMM d, ''yy");
-        String formattedDate = df.format(c.getTime());
         c.add(Calendar.DAY_OF_YEAR,0);
         Date Today = c.getTime();
         String today=df.format(Today.getTime());

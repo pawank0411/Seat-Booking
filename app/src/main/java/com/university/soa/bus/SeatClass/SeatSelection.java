@@ -5,10 +5,12 @@ package com.university.soa.bus.SeatClass;
  */
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.test.ServiceTestCase;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,14 +21,21 @@ import com.university.soa.bus.SavedSeats;
 import com.university.soa.bus.book;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
 
     private static final int COLUMNS =5;
-   // private TextView txtSeatSelected;
+    static Set<String>positions;
+    // private TextView txtSeatSelected;
     Button mBook;
     TextView time;
+    SharedPreferences seats;
+    SharedPreferences.Editor edit;
 
 
     @Override
@@ -35,9 +44,11 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
         setContentView(R.layout.activity_start);
         mBook=findViewById(R.id.button2);
         time=findViewById(R.id.show);
-      //  time.setText(R.string.show);
+        seats=getSharedPreferences("seats",MODE_PRIVATE);
+        positions= new HashSet<String>(seats.getStringSet("selected", new HashSet<String>()));
+        //  time.setText(R.string.show);
         mBook.setText(R.string.button2);
-     //   txtSeatSelected = (TextView)findViewById(R.id.txt_seat_selected);
+        //   txtSeatSelected = (TextView)findViewById(R.id.txt_seat_selected);
         List<AbstractItem> items = new ArrayList<>();
         for (int i=0; i<40; i++) {
 
@@ -74,7 +85,9 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
         else{
             mBook.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View arg0) {
-
+                    edit=seats.edit();
+                    edit.putStringSet("selected",positions);
+                    edit.commit();
                     // Start NewActivity.class
                     Intent myIntent = new Intent(SeatSelection.this,
                             SavedSeats.class);
