@@ -48,10 +48,6 @@ public class SavedSeats extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private FirebaseAuth mAuth;
-    private Context mContext = SavedSeats.this;
-    private List<BookedInfo> mbookDataList;
-    private PrefAdapter mBookAdapter;
-RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -223,12 +219,9 @@ RecyclerView recyclerView;
         /*String value2 = E2.getText().toString();
         String value3 = E3.getText().toString();
         String value4 = E4.getText().toString();
-       // PrefUtil.saveString(mContext, key, value);
-        ref.push().setValue(Pname);
-            passnumber.setText("");
-            Pname.setText("");
+     
             Toast.makeText(this, "Registered !!", Toast.LENGTH_SHORT).show();
-          BookedInfo newPrefData = new BookedInfo(key, value);
+         
             if (mbookDataList.contains(newPrefData)) {
                 int index = mbookDataList.indexOf(newPrefData);
                 mbookDataList.remove(index);
