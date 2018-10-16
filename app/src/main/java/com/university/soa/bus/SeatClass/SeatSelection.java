@@ -46,7 +46,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
         mBook=findViewById(R.id.button2);
         time=findViewById(R.id.show);
         seats=getSharedPreferences("seats",MODE_PRIVATE);
-        positions= new HashSet<String>(seats.getStringSet("selected", new HashSet<String>()));
+        positions= new HashSet<>(seats.getStringSet("selected", new HashSet<String>()));
         //  time.setText(R.string.show);
         mBook.setText(R.string.button2);
         //   txtSeatSelected = (TextView)findViewById(R.id.txt_seat_selected);
@@ -64,7 +64,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
 
         GridLayoutManager manager = new GridLayoutManager(this, COLUMNS);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.lst_items);
+        RecyclerView recyclerView = findViewById(R.id.lst_items);
         int spaceInPixels = 0;
         recyclerView.addItemDecoration(new RecyclerViewItemDecorator(spaceInPixels));
         recyclerView.setLayoutManager(manager);
