@@ -339,14 +339,14 @@ public class SavedSeats extends AppCompatActivity {
         setContentView(R.layout.booked_info);
       
 
-      selected=new HashSet<Integer>();
+      selected= new HashSet<>();
 
-        Saveinfo = (Button) findViewById(R.id.saveinfo);
-        button = (Button) findViewById(R.id.button);
-        Pname = (EditText) findViewById(R.id.PName);
-        Pnumber = (EditText) findViewById(R.id.PhnNumber);
-        Empcode = (EditText) findViewById(R.id.EmpCode);
-        passnumber = (EditText) findViewById(R.id.PsNum);
+        Saveinfo = findViewById(R.id.saveinfo);
+        button = findViewById(R.id.button);
+        Pname = findViewById(R.id.PName);
+        Pnumber = findViewById(R.id.PhnNumber);
+        Empcode = findViewById(R.id.EmpCode);
+        passnumber = findViewById(R.id.PsNum);
         ref = FirebaseDatabase.getInstance().getReference().child("booked details");
 
         Saveinfo.setOnClickListener(new View.OnClickListener() {
