@@ -318,7 +318,7 @@ import com.university.soa.bus.SeatClass.SelectableAdapter;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SavedSeats extends AppCompatActivity implements OnSeatSelected {
+public class SavedSeats extends AppCompatActivity {
 
 
     DatabaseReference ref;
@@ -327,8 +327,7 @@ public class SavedSeats extends AppCompatActivity implements OnSeatSelected {
     Button Saveinfo, button;
     SharedPreferences seats;
    
-    static Set<String> positions;
-    SharedPreferences.Editor edit;
+    Set<Integer> selected;
 
     
     String str_name, str_empcode, str_psnum, str_phnmber;
@@ -338,8 +337,9 @@ public class SavedSeats extends AppCompatActivity implements OnSeatSelected {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.booked_info);
-        seats = getSharedPreferences("seats", MODE_PRIVATE);
-        positions = new HashSet<String>(seats.getStringSet("selected", new HashSet<String>()));
+      
+
+      selected=new HashSet<Integer>();
 
         Saveinfo = (Button) findViewById(R.id.saveinfo);
         button = (Button) findViewById(R.id.button);
@@ -365,19 +365,15 @@ public class SavedSeats extends AppCompatActivity implements OnSeatSelected {
 
         //Addata ad = new Addata(str_name, str_empcode, str_phnmber, str_psnum);
             //positions1.remove(positions);
-            String b = String.valueOf(seats.getStringSet("s", positions));
-            ref.child(str_empcode).push().setValue(b);
+           // String b = String.valueOf(seats.getStringSet("s", positions));
+               ref.child(str_empcode).push().setValue(String.valueOf(selected));
            // Toast.makeText(this, "multiple", Toast.LENGTH_SHORT).show();
 
 
         Toast.makeText(SavedSeats.this, "Booked", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onSeatSelected(int count) {
-
-
-         }
+ 
 }
 
 
