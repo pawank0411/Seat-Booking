@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String str_empcode, a, b;
 
     EditText edt_empcode;
-    Button login, newuser;
+    Button login;
     //boolean b=false;
     Properties prop;
     DatabaseReference ref;
@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         appStatus = new AppStatus(getApplicationContext());
         login = findViewById(R.id.btn_login);
         edt_empcode = findViewById(R.id.CodeNum);
+        
+        //OnClickListeners
+        findViewById(R.id.newuser).setOnClickListener(this);
     }
 
     @Override
@@ -98,3 +101,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 }
+
+
