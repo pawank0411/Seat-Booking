@@ -1,15 +1,11 @@
 package com.university.soa.bus;
 
-/**
- * Created by pkumar on 5/13/18.
- */
-
 public class SaveData {
     String name;
     String empcode;
 
     public SaveData(){
-
+    //Required for firebase
     }
     public String getName() {
         return name;
@@ -29,8 +25,6 @@ public class SaveData {
 
     public SaveData(String name, String empcode) {
         this.name = name;
-
         this.empcode = empcode;
-
     }
 }
