@@ -26,66 +26,67 @@ import Models.AppStatus;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-        String str_empcode,a,b;
+    String str_empcode, a, b;
 
-        EditText edt_empcode;
-        Button login, newuser;
-        //boolean b=false;
-        Properties prop;
-        DatabaseReference ref;
-        FirebaseDatabase Database;
-        LinearLayout ll;
-        TextView t1;
-        RelativeLayout Rl;
-        //private ProgressBar progressBar;
-        AppStatus appStatus;
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-                super.onCreate(savedInstanceState);
-                setContentView(R.layout.activity_login);
-                t1= findViewById(R.id.seat);
-                ll= findViewById(R.id.layout1);
-                Rl= findViewById(R.id.home);
-                ll.setVisibility(View.VISIBLE);
-                t1.setVisibility(View.VISIBLE);
-                Rl.setVisibility(View.INVISIBLE);
-                prop=new Properties();
-               // auth = FirebaseAuth.getInstance();
-                Database = FirebaseDatabase.getInstance();
-                ref = Database.getReference().child("Employee Details : ");
-                appStatus=new AppStatus(getApplicationContext());
-                login = findViewById(R.id.btn_login);
-                newuser = findViewById(R.id.newuser);
-                edt_empcode = findViewById(R.id.CodeNum);
+    EditText edt_empcode;
+    Button login, newuser;
+    //boolean b=false;
+    Properties prop;
+    DatabaseReference ref;
+    FirebaseDatabase Database;
+    LinearLayout ll;
+    TextView t1;
+    RelativeLayout Rl;
+    //private ProgressBar progressBar;
+    AppStatus appStatus;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        t1 = findViewById(R.id.seat);
+        ll = findViewById(R.id.layout1);
+        Rl = findViewById(R.id.home);
+        ll.setVisibility(View.VISIBLE);
+        t1.setVisibility(View.VISIBLE);
+        Rl.setVisibility(View.INVISIBLE);
+        prop = new Properties();
+        // auth = FirebaseAuth.getInstance();
+        Database = FirebaseDatabase.getInstance();
+        ref = Database.getReference().child("Employee Details : ");
+        appStatus = new AppStatus(getApplicationContext());
+        login = findViewById(R.id.btn_login);
+        newuser = findViewById(R.id.newuser);
+        edt_empcode = findViewById(R.id.CodeNum);
 
 
-                newuser.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                                startActivity(new Intent(MainActivity.this,LoginRegistration.class));
-                        }
-                });
-        }
+        newuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LoginRegistration.class));
+            }
+        });
+    }
 
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-                MenuInflater inflater=getMenuInflater();
-                inflater.inflate(R.menu.logout,menu);
-                return true;
-        }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logout, menu);
+        return true;
+    }
 
-        @Override
-        public void onClick(View v) {
-                if (appStatus.isOnline()) {
-                        str_empcode=edt_empcode.getText().toString().trim();
-                        SharedPreferences preferences = getSharedPreferences("MYPREFS", MODE_PRIVATE);
-                        try {
-                                if (str_empcode.length()==0) {
-                                        Toast.makeText(getApplicationContext(),
-                                                "Please enter your Employee Code",
-                                                Toast.LENGTH_LONG).show();
-                                }
-                                else if(str_empcode.equals("1234")){
+    @Override
+    public void onClick(View v) {
+        if (appStatus.isOnline()) {
+            str_empcode = edt_empcode.getText().toString().trim();
+            SharedPreferences preferences = getSharedPreferences("MYPREFS", MODE_PRIVATE);
+            try {
+                if (str_empcode.length() == 0) {
+                    Toast.makeText(getApplicationContext(),
+                            "Please enter your Employee Code",
+                            Toast.LENGTH_LONG).show();
+                }
+                                /*else if(str_empcode.equals("1234")){
                                         Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
                                         Intent intent=new Intent(MainActivity.this,book.class);
                                         startActivity(intent);
@@ -102,15 +103,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         Intent intent=new Intent(MainActivity.this,book.class);
                                         startActivity(intent);
 
-                                }
-                        }catch (Exception e) {
-                                Toast.makeText(getApplicationContext(), "We did not find any account with the given Employee Code in this device", Toast.LENGTH_LONG).show();
-                        }
-                } else {
-                        Toast.makeText(getApplicationContext(),"Please see that you have Active internet connection..",Toast.LENGTH_LONG).show();
+                                }*/
+                else if (str_empcode.equals("1234") || str_empcode.equals("0000")
+                        || str_empcode.equals("1111")) {
+                    Toast.makeText(this, "Welcome User",
+                            Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, book.class);
+                    intent.putExtra("employee", str_empcode);
+                    startActivity(intent);
                 }
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "We did not find any account with the given Employee Code in this device", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "Please see that you have Active internet connection..", Toast.LENGTH_LONG).show();
         }
+    }
 
-        }
+}
 
 

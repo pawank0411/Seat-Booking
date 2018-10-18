@@ -6,18 +6,19 @@ package com.university.soa.bus.SeatClass;
 
 public class CenterItem extends AbstractItem {
 
-    boolean selectable;
+    private boolean selectable;
+
     public CenterItem(String label) {
         super(label);
         selectable=true;
     }
 
-    public boolean isSelectable() {
+    boolean isSelectable() {
 
         return selectable;
     }
 
-    public void setSelectable(boolean selectable) {
+    void setSelectable(boolean selectable) {
         this.selectable = selectable;
     }
     @Override

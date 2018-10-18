@@ -305,13 +305,17 @@ public class SavedSeats extends AppCompatActivity {
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.university.soa.bus.SeatClass.OnSeatSelected;
 import com.university.soa.bus.SeatClass.SelectableAdapter;
 
@@ -326,10 +330,9 @@ public class SavedSeats extends AppCompatActivity {
 
     Button Saveinfo, button;
     SharedPreferences seats;
-   
-    Set<Integer> selected;
+    Set<String> selected;
 
-    
+
     String str_name, str_empcode, str_psnum, str_phnmber;
     EditText Pname, Pnumber, Empcode, passnumber;
 
@@ -337,9 +340,9 @@ public class SavedSeats extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.booked_info);
-      
 
-      selected= new HashSet<>();
+
+        selected = new HashSet<>();
 
         Saveinfo = findViewById(R.id.saveinfo);
         button = findViewById(R.id.button);
@@ -352,8 +355,8 @@ public class SavedSeats extends AppCompatActivity {
         Saveinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                   store();
-                 }
+                store();
+            }
         });
     }
 
@@ -362,18 +365,30 @@ public class SavedSeats extends AppCompatActivity {
         str_empcode = Empcode.getText().toString().trim();
         str_phnmber = Pnumber.getText().toString().trim();
         str_psnum = passnumber.getText().toString().trim();
+        selected = seats.getStringSet(str_empcode, selected);
 
         //Addata ad = new Addata(str_name, str_empcode, str_phnmber, str_psnum);
-            //positions1.remove(positions);
-           // String b = String.valueOf(seats.getStringSet("s", positions));
-               ref.child(str_empcode).push().setValue(String.valueOf(selected));
-           // Toast.makeText(this, "multiple", Toast.LENGTH_SHORT).show();
+        //positions1.remove(positions);
+        // String b = String.valueOf(seats.getStringSet("s", positions));
+        ref.child(str_empcode).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // TODO: 18/10/2018 Add check for what is currently selected before updating the data on Firebase
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // TODO: 18/10/2018 Handle errors
+            }
+        });
+        ref.child(str_empcode).push().setValue(String.valueOf(selected));
+        // Toast.makeText(this, "multiple", Toast.LENGTH_SHORT).show();
 
 
         Toast.makeText(SavedSeats.this, "Booked", Toast.LENGTH_SHORT).show();
     }
 
- 
+
 }
 
 
