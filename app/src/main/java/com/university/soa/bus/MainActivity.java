@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.Menu;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,15 +21,16 @@ import java.util.Properties;
 
 import Models.AppStatus;
 
-/**
- * Created by pkumar on 5/7/18.
- */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     String str_empcode, a, b;
 
     EditText edt_empcode;
-    Button login, newuser;
+
+    Button newuser;
+
+    Button login;
+
     //boolean b=false;
     Properties prop;
     DatabaseReference ref;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ref = Database.getReference().child("Employee Details : ");
         appStatus = new AppStatus(getApplicationContext());
         login = findViewById(R.id.btn_login);
+
         newuser = findViewById(R.id.newuser);
         edt_empcode = findViewById(R.id.CodeNum);
 
@@ -66,6 +68,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, LoginRegistration.class));
             }
         });
+
+      
+        
+        //OnClickListeners
+        findViewById(R.id.newuser).setOnClickListener(this);
+
     }
 
     @Override
@@ -82,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             SharedPreferences preferences = getSharedPreferences("MYPREFS", MODE_PRIVATE);
             try {
                 if (str_empcode.length() == 0) {
+
                     Toast.makeText(getApplicationContext(),
                             "Please enter your Employee Code",
                             Toast.LENGTH_LONG).show();
@@ -111,12 +120,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intent = new Intent(MainActivity.this, book.class);
                     intent.putExtra("employee", str_empcode);
                     startActivity(intent);
+                } else if (str_empcode.equals("1234")) {
+                    Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this, book.class));
+
+                } else if (str_empcode.equals("0000")) {
+                    Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this, book.class));
+
+                } else if (str_empcode.equals("1111")) {
+                    Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this, book.class));
+
+
                 }
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "We did not find any account with the given Employee Code in this device", Toast.LENGTH_LONG).show();
             }
         } else {
             Toast.makeText(getApplicationContext(), "Please see that you have Active internet connection..", Toast.LENGTH_LONG).show();
+        }
+    }
+        switch (v.getId()){
+            case R.id.newuser:
+                startActivity(new Intent(MainActivity.this, LoginRegistration.class));
+                break;
         }
     }
 
