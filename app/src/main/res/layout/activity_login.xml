@@ -131,7 +131,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="27dp"
             android:background="@drawable/buttonlayout"
-            android:onClick="Tour1"
             android:text="@string/Tour1" />
 
         <Button

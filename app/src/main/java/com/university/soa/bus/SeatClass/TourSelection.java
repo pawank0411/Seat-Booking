@@ -43,14 +43,14 @@ public class TourSelection extends AppCompatActivity {
         mtour5 = findViewById(R.id.Tour5);
         mtour6 = findViewById(R.id.Tour6);
         Rl.setVisibility(View.VISIBLE);
-        ll.setVisibility(View.INVISIBLE);
+        ll.setVisibility(View.GONE);
         mtour1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
 
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
                         checkbox.class);
-                myIntent.putExtra("employee", str_empcode);
+                myIntent.putExtra("employee", str_empcode + "T1");
                 startActivity(myIntent);
             }
         });
@@ -60,7 +60,7 @@ public class TourSelection extends AppCompatActivity {
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
                         checkbox1.class);
-                myIntent.putExtra("employee", str_empcode);
+                myIntent.putExtra("employee", str_empcode + "T2");
                 startActivity(myIntent);
             }
         });
@@ -70,7 +70,7 @@ public class TourSelection extends AppCompatActivity {
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
                         SeatSelection.class);
-                myIntent.putExtra("employee", str_empcode);
+                myIntent.putExtra("employee", str_empcode + "T3");
                 startActivity(myIntent);
             }
         });
@@ -80,7 +80,7 @@ public class TourSelection extends AppCompatActivity {
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
                         SeatSelection.class);
-                myIntent.putExtra("employee", str_empcode);
+                myIntent.putExtra("employee", str_empcode + "T4");
                 startActivity(myIntent);
             }
         });
@@ -90,7 +90,7 @@ public class TourSelection extends AppCompatActivity {
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
                         SeatSelection.class);
-                myIntent.putExtra("employee", str_empcode);
+                myIntent.putExtra("employee", str_empcode + "T5");
                 startActivity(myIntent);
             }
         });
@@ -100,7 +100,7 @@ public class TourSelection extends AppCompatActivity {
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
                         SeatSelection.class);
-                myIntent.putExtra("employee", str_empcode);
+                myIntent.putExtra("employee", str_empcode + "T6");
                 startActivity(myIntent);
             }
         });

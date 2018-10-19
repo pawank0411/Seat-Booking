@@ -28,7 +28,7 @@ public class book extends AppCompatActivity {
 
 
     Button B1, B2, B3;
-    String str_empcode;
+    String str_empcode, date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +44,18 @@ public class book extends AppCompatActivity {
         B2 = findViewById(R.id.button9);
         B3 = findViewById(R.id.button8);
 
-        Calendar c = Calendar.getInstance();
+        final Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("EEE, MMM d, ''yy", Locale.getDefault());
         c.add(Calendar.DAY_OF_YEAR, 0);
         Date Today = c.getTime();
         String today = df.format(Today.getTime());
         B1.setText(today);
+        date = today;
         B1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(book.this, TourSelection.class);
-                intent.putExtra("employee", str_empcode);
+                intent.putExtra("employee", str_empcode + "D1");
                 startActivity(intent);
             }
         });
@@ -62,11 +63,12 @@ public class book extends AppCompatActivity {
         Date Tommorrow = c.getTime();
         String tm = df.format(Tommorrow.getTime());
         B3.setText(tm);
+        date = tm;
         B3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(book.this, TourSelection.class);
-                intent.putExtra("employee", str_empcode);
+                intent.putExtra("employee", str_empcode + "D2");
                 startActivity(intent);
             }
         });
@@ -74,11 +76,12 @@ public class book extends AppCompatActivity {
         Date Dtm = c.getTime();
         String dtm = df.format(Dtm.getTime());
         B2.setText(dtm);
+        date = dtm;
         B2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(book.this, TourSelection.class);
-                intent.putExtra("employee", str_empcode);
+                intent.putExtra("employee", str_empcode + "D3");
                 startActivity(intent);
             }
         });

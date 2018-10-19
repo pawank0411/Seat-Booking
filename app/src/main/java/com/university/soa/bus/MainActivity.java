@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Rl = findViewById(R.id.home);
         ll.setVisibility(View.VISIBLE);
         t1.setVisibility(View.VISIBLE);
-        Rl.setVisibility(View.INVISIBLE);
+        Rl.setVisibility(View.GONE);
         prop = new Properties();
         // auth = FirebaseAuth.getInstance();
         Database = FirebaseDatabase.getInstance();
@@ -139,12 +139,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         } else {
             Toast.makeText(getApplicationContext(), "Please see that you have Active internet connection..", Toast.LENGTH_LONG).show();
-        }
-    }
-        switch (v.getId()){
-            case R.id.newuser:
-                startActivity(new Intent(MainActivity.this, LoginRegistration.class));
-                break;
         }
     }
 
