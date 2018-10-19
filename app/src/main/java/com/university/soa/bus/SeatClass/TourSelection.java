@@ -1,4 +1,5 @@
 package com.university.soa.bus.SeatClass;
+
 import android.content.Intent;
 import android.net.LinkAddress;
 import android.os.Bundle;
@@ -16,17 +17,25 @@ import com.university.soa.bus.RadioButton.checkbox1;
 import org.w3c.dom.Text;
 
 public class TourSelection extends AppCompatActivity {
-    Button mtour1,mtour2,mtour3,mtour4,mtour5,mtour6;
+    Button mtour1, mtour2, mtour3, mtour4, mtour5, mtour6;
     RelativeLayout Rl;
     LinearLayout ll;
     TextView t1;
+    String str_empcode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ll= findViewById(R.id.layout1);
-        t1= findViewById(R.id.seat);
-        Rl= findViewById(R.id.home);
+
+        if (getIntent() != null && getIntent().getExtras() != null
+                && getIntent().hasExtra("employee")) {
+            str_empcode = getIntent().getStringExtra("employee");
+        }
+
+        ll = findViewById(R.id.layout1);
+        t1 = findViewById(R.id.seat);
+        Rl = findViewById(R.id.home);
         mtour1 = findViewById(R.id.Tour1);
         mtour2 = findViewById(R.id.Tour2);
         mtour3 = findViewById(R.id.Tour3);
@@ -41,6 +50,7 @@ public class TourSelection extends AppCompatActivity {
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
                         checkbox.class);
+                myIntent.putExtra("employee", str_empcode);
                 startActivity(myIntent);
             }
         });
@@ -50,6 +60,7 @@ public class TourSelection extends AppCompatActivity {
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
                         checkbox1.class);
+                myIntent.putExtra("employee", str_empcode);
                 startActivity(myIntent);
             }
         });
@@ -59,6 +70,7 @@ public class TourSelection extends AppCompatActivity {
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
                         SeatSelection.class);
+                myIntent.putExtra("employee", str_empcode);
                 startActivity(myIntent);
             }
         });
@@ -68,6 +80,7 @@ public class TourSelection extends AppCompatActivity {
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
                         SeatSelection.class);
+                myIntent.putExtra("employee", str_empcode);
                 startActivity(myIntent);
             }
         });
@@ -77,6 +90,7 @@ public class TourSelection extends AppCompatActivity {
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
                         SeatSelection.class);
+                myIntent.putExtra("employee", str_empcode);
                 startActivity(myIntent);
             }
         });
@@ -86,6 +100,7 @@ public class TourSelection extends AppCompatActivity {
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
                         SeatSelection.class);
+                myIntent.putExtra("employee", str_empcode);
                 startActivity(myIntent);
             }
         });

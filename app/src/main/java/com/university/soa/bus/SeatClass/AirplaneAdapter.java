@@ -1,6 +1,6 @@
 package com.university.soa.bus.SeatClass;
 
-/**
+/*
  * Created by pkumar on 5/6/18.
  */
 
@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.university.soa.bus.R;
-import com.university.soa.bus.SeatClass.SelectableAdapter;
 
 import java.util.HashSet;
 import java.util.List;
@@ -22,7 +21,7 @@ import java.util.Set;
 public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
 
     private OnSeatSelected mOnSeatSelected;
-    Set<Integer> selected=new HashSet<Integer>();
+    private Set<String> selected = new HashSet<>(), positions;
 
     private static class EdgeViewHolder extends RecyclerView.ViewHolder {
 
@@ -30,10 +29,10 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
         private final ImageView imgSeatSelected;
 
 
-        public EdgeViewHolder(View itemView) {
+        EdgeViewHolder(View itemView) {
             super(itemView);
-            imgSeat = (ImageView) itemView.findViewById(R.id.img_seat);
-            imgSeatSelected = (ImageView) itemView.findViewById(R.id.img_seat_selected);
+            imgSeat = itemView.findViewById(R.id.img_seat);
+            imgSeatSelected = itemView.findViewById(R.id.img_seat_selected);
 
         }
 
@@ -44,10 +43,10 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
         ImageView imgSeat;
         private final ImageView imgSeatSelected;
 
-        public CenterViewHolder(View itemView) {
+        CenterViewHolder(View itemView) {
             super(itemView);
-            imgSeat = (ImageView) itemView.findViewById(R.id.img_seat);
-            imgSeatSelected = (ImageView) itemView.findViewById(R.id.img_seat_selected);
+            imgSeat = itemView.findViewById(R.id.img_seat);
+            imgSeatSelected = itemView.findViewById(R.id.img_seat_selected);
 
 
         }
@@ -56,7 +55,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
 
     private static class EmptyViewHolder extends RecyclerView.ViewHolder {
 
-        public EmptyViewHolder(View itemView) {
+        EmptyViewHolder(View itemView) {
             super(itemView);
         }
 
@@ -67,9 +66,10 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
 
     private List<AbstractItem> mItems;
 
-    public AirplaneAdapter(Context context, List<AbstractItem> items) {
+    public AirplaneAdapter(Context context, List<AbstractItem> items, Set<String> selected) {
         mOnSeatSelected = (OnSeatSelected) context;
         mContext = context;
+        positions = selected;
         mLayoutInflater = LayoutInflater.from(context);
         mItems = items;
     }
@@ -104,7 +104,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
         if (type == AbstractItem.TYPE_CENTER) {
             final CenterItem item = (CenterItem) mItems.get(position);
             CenterViewHolder holder = (CenterViewHolder) viewHolder;
-            if(SeatSelection.positions.contains(String.valueOf(position)) && !selected.contains(position) ) {
+            if(SeatSelection.positions.contains(String.valueOf(position)) && !selected.contains(String.valueOf(position)) ) {
                 item.setSelectable(false);
                 holder.imgSeatSelected.setVisibility(View.VISIBLE);
 
@@ -118,16 +118,18 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                         toggleSelection(position);
                         if (isSelected(position)) {
                             SeatSelection.positions.add(String.valueOf(position));
-                            selected.add(position);
+                            selected.add(String.valueOf(position));
+                            positions.add(String.valueOf(position));
                         } else if (SeatSelection.positions.contains(String.valueOf(position))) {
                             SeatSelection.positions.remove(String.valueOf(position));
-                            selected.remove(position);
+                            selected.remove(String.valueOf(position));
+                            positions.remove(String.valueOf(position));
                         }
                     }
                     else {
                         Toast.makeText(mContext, "Seat already booked", Toast.LENGTH_SHORT).show();
                     }
-                    mOnSeatSelected.onSeatSelected(getSelectedItemCount());
+                    mOnSeatSelected.onSeatSelected(getSelectedItemCount(), positions);
                 }
             });
 
@@ -137,7 +139,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
         } else if (type == AbstractItem.TYPE_EDGE) {
             final EdgeItem item = (EdgeItem) mItems.get(position);
             EdgeViewHolder holder = (EdgeViewHolder) viewHolder;
-            if(SeatSelection.positions.contains(String.valueOf(position)) && !selected.contains(position) ) {
+            if(SeatSelection.positions.contains(String.valueOf(position)) && !selected.contains(String.valueOf(position)) ) {
                 item.setSelectable(false);
                 holder.imgSeatSelected.setVisibility(View.VISIBLE);
 
@@ -151,17 +153,19 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                         toggleSelection(position);
                         if (isSelected(position)) {
                             SeatSelection.positions.add(String.valueOf(position));
-                            selected.add(position);
+                            selected.add(String.valueOf(position));
+                            positions.add(String.valueOf(position));
                         } else if (SeatSelection.positions.contains(String.valueOf(position))) {
                             SeatSelection.positions.remove(String.valueOf(position));
-                            selected.remove(position);
+                            selected.remove(String.valueOf(position));
+                            positions.remove(String.valueOf(position));
                         }
                     }
                     else {
                         Toast.makeText(mContext, "Seat already booked", Toast.LENGTH_SHORT).show();
 
                     }
-                    mOnSeatSelected.onSeatSelected(getSelectedItemCount());
+                    mOnSeatSelected.onSeatSelected(getSelectedItemCount(), positions);
                 }
             });
 

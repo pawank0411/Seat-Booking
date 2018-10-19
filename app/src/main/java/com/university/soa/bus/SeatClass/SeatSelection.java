@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.test.ServiceTestCase;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,11 +31,14 @@ import java.util.Set;
 
 public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
 
-    private static final int COLUMNS =5;
-    static Set<String>positions;
+    private static final int COLUMNS = 5;
+    static Set<String> positions;
     // private TextView txtSeatSelected;
     Button mBook;
     TextView time;
+    Toast mToast;
+    int bookCount = 0;
+    String str_empcode;
     SharedPreferences seats;
     SharedPreferences.Editor edit;
 
@@ -43,24 +47,47 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        mBook=findViewById(R.id.button2);
-        time=findViewById(R.id.show);
-        seats=getSharedPreferences("seats",MODE_PRIVATE);
-        positions= new HashSet<>(seats.getStringSet("selected", new HashSet<String>()));
+
+        if (getIntent() != null && getIntent().getExtras() != null
+                && getIntent().hasExtra("employee")) {
+            str_empcode = getIntent().getStringExtra("employee");
+        }
+
+        mBook = findViewById(R.id.button2);
+        time = findViewById(R.id.show);
+        seats = getSharedPreferences("seats", MODE_PRIVATE);
+        positions = new HashSet<>(seats.getStringSet(str_empcode, new HashSet<String>()));
         //  time.setText(R.string.show);
         mBook.setText(R.string.button2);
         //   txtSeatSelected = (TextView)findViewById(R.id.txt_seat_selected);
         List<AbstractItem> items = new ArrayList<>();
-        for (int i=0; i<40; i++) {
+        for (int i = 0; i < 40; i++) {
 
-            if (i%COLUMNS==0 || i%COLUMNS==4) {
+            if (i % COLUMNS == 0 || i % COLUMNS == 4) {
                 items.add(new EdgeItem(String.valueOf(i)));
-            } else if (i%COLUMNS==1 || i%COLUMNS==3) {
+            } else if (i % COLUMNS == 1 || i % COLUMNS == 3) {
                 items.add(new CenterItem(String.valueOf(i)));
             } else {
                 items.add(new EmptyItem(String.valueOf(i)));
             }
         }
+
+        mBook.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                if (bookCount == 0) {
+                    showToast("Please Select Seats");
+                } else {
+                    edit = seats.edit();
+                    showToast(positions.size() + "seats selected");
+                    edit.putStringSet(str_empcode, positions);
+                    edit.commit();
+                    // Start NewActivity.class
+                    Intent myIntent = new Intent(SeatSelection.this,
+                            SavedSeats.class);
+                    startActivity(myIntent);
+                }
+            }
+        });
 
         GridLayoutManager manager = new GridLayoutManager(this, COLUMNS);
 
@@ -69,38 +96,22 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
         recyclerView.addItemDecoration(new RecyclerViewItemDecorator(spaceInPixels));
         recyclerView.setLayoutManager(manager);
 
-        AirplaneAdapter adapter = new AirplaneAdapter(this, items);
+        AirplaneAdapter adapter = new AirplaneAdapter(this, items, positions);
         recyclerView.setAdapter(adapter);
     }
+
+    private void showToast(String message) {
+        if (mToast != null)
+            mToast.cancel();
+        mToast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+        mToast.show();
+    }
+
     @Override
-    public void onSeatSelected(int count) {
-        mBook.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-                Toast.makeText(getApplicationContext(), "Please Select Seats", Toast.LENGTH_SHORT).show();
-            }
-        });
-        if(count==0) {
-            mBook.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View arg0) {
-                    Toast.makeText(getApplicationContext(), "Please Select Seats", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-        else{
-            mBook.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View arg0) {
-                    edit=seats.edit();
-                    edit.putStringSet("selected",positions);
-                    edit.commit();
-                    // Start NewActivity.class
-                    Intent myIntent = new Intent(SeatSelection.this,
-                            SavedSeats.class);
-                    startActivity(myIntent);
-                }
-            });
-        }
-
-
+    public void onSeatSelected(int count, Set<String> selected) {
+        bookCount = count;
+        positions = selected;
+        showToast(positions.size() + "seats selected");
     }
 
 }

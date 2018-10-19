@@ -26,7 +26,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String str_empcode, a, b;
 
     EditText edt_empcode;
+
+    Button newuser;
+
     Button login;
+
     //boolean b=false;
     Properties prop;
     DatabaseReference ref;
@@ -53,10 +57,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ref = Database.getReference().child("Employee Details : ");
         appStatus = new AppStatus(getApplicationContext());
         login = findViewById(R.id.btn_login);
+
+        newuser = findViewById(R.id.newuser);
         edt_empcode = findViewById(R.id.CodeNum);
+
+
+        newuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, LoginRegistration.class));
+            }
+        });
+
+      
         
         //OnClickListeners
         findViewById(R.id.newuser).setOnClickListener(this);
+
     }
 
     @Override
@@ -73,7 +90,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             SharedPreferences preferences = getSharedPreferences("MYPREFS", MODE_PRIVATE);
             try {
                 if (str_empcode.length() == 0) {
-                    Toast.makeText(getApplicationContext(), "Please enter your Employee Code", Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(getApplicationContext(),
+                            "Please enter your Employee Code",
+                            Toast.LENGTH_LONG).show();
+                }
+                                /*else if(str_empcode.equals("1234")){
+                                        Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
+                                        Intent intent=new Intent(MainActivity.this,book.class);
+                                        startActivity(intent);
+
+                                }
+                                else if(str_empcode.equals("0000")){
+                                        Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
+                                        Intent intent=new Intent(MainActivity.this,book.class);
+                                        startActivity(intent);
+
+                                }
+                                else if(str_empcode.equals("1111")){
+                                        Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
+                                        Intent intent=new Intent(MainActivity.this,book.class);
+                                        startActivity(intent);
+
+                                }*/
+                else if (str_empcode.equals("1234") || str_empcode.equals("0000")
+                        || str_empcode.equals("1111")) {
+                    Toast.makeText(this, "Welcome User",
+                            Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, book.class);
+                    intent.putExtra("employee", str_empcode);
+                    startActivity(intent);
                 } else if (str_empcode.equals("1234")) {
                     Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this, book.class));
@@ -86,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this, book.class));
 
+
                 }
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "We did not find any account with the given Employee Code in this device", Toast.LENGTH_LONG).show();
@@ -93,13 +140,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             Toast.makeText(getApplicationContext(), "Please see that you have Active internet connection..", Toast.LENGTH_LONG).show();
         }
-
+    }
         switch (v.getId()){
             case R.id.newuser:
                 startActivity(new Intent(MainActivity.this, LoginRegistration.class));
                 break;
         }
     }
+
 }
 
 
