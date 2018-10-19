@@ -141,12 +141,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(getApplicationContext(), "Please see that you have Active internet connection..", Toast.LENGTH_LONG).show();
         }
     }
-        switch (v.getId()){
-            case R.id.newuser:
-                startActivity(new Intent(MainActivity.this, LoginRegistration.class));
-                break;
-        }
-    }
 
 }
 
