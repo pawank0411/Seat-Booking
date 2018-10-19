@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Rl = findViewById(R.id.home);
         ll.setVisibility(View.VISIBLE);
         t1.setVisibility(View.VISIBLE);
-        Rl.setVisibility(View.INVISIBLE);
+        Rl.setVisibility(View.GONE);
         prop = new Properties();
         // auth = FirebaseAuth.getInstance();
         Database = FirebaseDatabase.getInstance();

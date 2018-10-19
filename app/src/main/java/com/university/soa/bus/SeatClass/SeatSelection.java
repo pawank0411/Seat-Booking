@@ -84,6 +84,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
                     // Start NewActivity.class
                     Intent myIntent = new Intent(SeatSelection.this,
                             SavedSeats.class);
+                    myIntent.putExtra("employee", str_empcode);
                     startActivity(myIntent);
                 }
             }

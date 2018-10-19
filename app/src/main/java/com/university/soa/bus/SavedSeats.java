@@ -334,7 +334,7 @@ public class SavedSeats extends AppCompatActivity {
     Set<String> selected;
 
 
-    String str_name, str_empcode, str_psnum, str_phnmber;
+    String str_name, str_empcode, str_psnum, str_phnmber, emp_code;
     EditText Pname, Pnumber, Empcode, passnumber;
 
     @Override
@@ -342,6 +342,10 @@ public class SavedSeats extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.booked_info);
 
+        if (getIntent() != null && getIntent().getExtras() != null
+                && getIntent().hasExtra("employee")) {
+            emp_code = getIntent().getStringExtra("employee");
+        }
 
         selected = new HashSet<>();
 
@@ -352,7 +356,7 @@ public class SavedSeats extends AppCompatActivity {
         Empcode = findViewById(R.id.EmpCode);
         passnumber = findViewById(R.id.PsNum);
         seats = getSharedPreferences("seats", MODE_PRIVATE);
-        selected = seats.getStringSet(str_empcode, new HashSet<String>());
+        selected = seats.getStringSet(emp_code, new HashSet<String>());
         ref = FirebaseDatabase.getInstance().getReference().child("booked details");
 
         Saveinfo.setOnClickListener(new View.OnClickListener() {
