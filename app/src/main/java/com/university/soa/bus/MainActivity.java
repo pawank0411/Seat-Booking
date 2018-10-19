@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "Welcome User",
                             Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, book.class);
-                    intent.putExtra("employee", str_empcode);
                     startActivity(intent);
                 } else if (str_empcode.equals("1234")) {
                     Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
