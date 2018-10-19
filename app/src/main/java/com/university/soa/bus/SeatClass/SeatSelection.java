@@ -78,7 +78,6 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
                     showToast("Please Select Seats");
                 } else {
                     edit = seats.edit();
-                    Log.i("Seats", "Selected: " + positions);
                     showToast(positions.size() + "seats selected");
                     edit.putStringSet(str_empcode, positions);
                     edit.commit();

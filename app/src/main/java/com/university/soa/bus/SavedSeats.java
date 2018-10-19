@@ -320,6 +320,7 @@ import com.university.soa.bus.SeatClass.OnSeatSelected;
 import com.university.soa.bus.SeatClass.SelectableAdapter;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class SavedSeats extends AppCompatActivity {
@@ -350,6 +351,8 @@ public class SavedSeats extends AppCompatActivity {
         Pnumber = findViewById(R.id.PhnNumber);
         Empcode = findViewById(R.id.EmpCode);
         passnumber = findViewById(R.id.PsNum);
+        seats = getSharedPreferences("seats", MODE_PRIVATE);
+        selected = seats.getStringSet(str_empcode, new HashSet<String>());
         ref = FirebaseDatabase.getInstance().getReference().child("booked details");
 
         Saveinfo.setOnClickListener(new View.OnClickListener() {
@@ -365,27 +368,32 @@ public class SavedSeats extends AppCompatActivity {
         str_empcode = Empcode.getText().toString().trim();
         str_phnmber = Pnumber.getText().toString().trim();
         str_psnum = passnumber.getText().toString().trim();
-        selected = seats.getStringSet(str_empcode, selected);
-
+        Log.i("Seats", "Selected: " + selected);
         //Addata ad = new Addata(str_name, str_empcode, str_phnmber, str_psnum);
         //positions1.remove(positions);
         // String b = String.valueOf(seats.getStringSet("s", positions));
-        ref.child(str_empcode).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // TODO: 18/10/2018 Add check for what is currently selected before updating the data on Firebase
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // TODO: 18/10/2018 Handle errors
-            }
-        });
         ref.child(str_empcode).push().setValue(String.valueOf(selected));
         // Toast.makeText(this, "multiple", Toast.LENGTH_SHORT).show();
 
 
-        Toast.makeText(SavedSeats.this, "Booked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SavedSeats.this, printSelected(selected), Toast.LENGTH_LONG).show();
+    }
+
+    private String printSelected(Set<String> selectedSeats) {
+        StringBuilder result = new StringBuilder();
+        String[] seats = selectedSeats.toArray(new String[selectedSeats.size()]);
+
+        for (int i = 0; i < seats.length; i++) {
+            if (i == seats.length - 1) {
+                result.append(seats[i]);
+                result.append(".");
+            } else {
+                result.append(seats[i]);
+                result.append(", ");
+            }
+        }
+
+        return result.toString();
     }
 
 
