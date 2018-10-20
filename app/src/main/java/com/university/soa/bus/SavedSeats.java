@@ -319,8 +319,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.university.soa.bus.SeatClass.OnSeatSelected;
 import com.university.soa.bus.SeatClass.SelectableAdapter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 public class SavedSeats extends AppCompatActivity {
@@ -332,8 +334,7 @@ public class SavedSeats extends AppCompatActivity {
     Button Saveinfo, button;
     SharedPreferences seats;
     Set<String> selected;
-
-
+    List<Integer> selectSeats = new ArrayList<>();
     String str_name, str_empcode, str_psnum, str_phnmber, emp_code;
     EditText Pname, Pnumber, Empcode, passnumber;
 
@@ -345,6 +346,7 @@ public class SavedSeats extends AppCompatActivity {
         if (getIntent() != null && getIntent().getExtras() != null
                 && getIntent().hasExtra("employee")) {
             emp_code = getIntent().getStringExtra("employee");
+            selectSeats = getIntent().getIntegerArrayListExtra("seats");
         }
 
         selected = new HashSet<>();
@@ -380,19 +382,18 @@ public class SavedSeats extends AppCompatActivity {
         // Toast.makeText(this, "multiple", Toast.LENGTH_SHORT).show();
 
 
-        Toast.makeText(SavedSeats.this, printSelected(selected), Toast.LENGTH_LONG).show();
+        Toast.makeText(SavedSeats.this, printSelected(selectSeats), Toast.LENGTH_LONG).show();
     }
 
-    private String printSelected(Set<String> selectedSeats) {
+    private String printSelected(List<Integer> selectedSeats) {
         StringBuilder result = new StringBuilder();
-        String[] seats = selectedSeats.toArray(new String[selectedSeats.size()]);
 
-        for (int i = 0; i < seats.length; i++) {
-            if (i == seats.length - 1) {
-                result.append(seats[i]);
+        for (int i = 0; i < selectedSeats.size(); i++) {
+            if (i == selectedSeats.size() - 1) {
+                result.append(selectedSeats.get(i));
                 result.append(".");
             } else {
-                result.append(seats[i]);
+                result.append(selectedSeats.get(i));
                 result.append(", ");
             }
         }
