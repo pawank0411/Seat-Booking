@@ -302,6 +302,7 @@ public class SavedSeats extends AppCompatActivity {
     }*/
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -318,6 +319,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.university.soa.bus.SeatClass.OnSeatSelected;
 import com.university.soa.bus.SeatClass.SelectableAdapter;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -337,6 +340,7 @@ public class SavedSeats extends AppCompatActivity {
     List<Integer> selectSeats = new ArrayList<>();
     String str_name, str_empcode, str_psnum, str_phnmber, emp_code;
     EditText Pname, Pnumber, Empcode, passnumber;
+    BookingInfo info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -346,7 +350,9 @@ public class SavedSeats extends AppCompatActivity {
         if (getIntent() != null && getIntent().getExtras() != null
                 && getIntent().hasExtra("employee")) {
             emp_code = getIntent().getStringExtra("employee");
-            selectSeats = getIntent().getIntegerArrayListExtra("seats");
+            info = new BookingInfo();
+            info = Parcels.unwrap(getIntent().getParcelableExtra("info"));
+            selectSeats = info.seats;
         }
 
         selected = new HashSet<>();
@@ -383,6 +389,13 @@ public class SavedSeats extends AppCompatActivity {
 
 
         Toast.makeText(SavedSeats.this, printSelected(selectSeats), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, TicketActivity.class);
+        info.emp_name = str_name;
+        info.emp_code = str_empcode;
+        info.phoneNo = str_phnmber;
+        info.passNo = str_psnum;
+        intent.putExtra("info", Parcels.wrap(info));
+        startActivity(intent);
     }
 
     private String printSelected(List<Integer> selectedSeats) {
