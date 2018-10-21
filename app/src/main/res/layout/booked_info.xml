@@ -10,24 +10,22 @@
         android:id="@+id/Details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText"
-        android:layout_alignBottom="@+id/editText"
         android:layout_centerHorizontal="true"
         android:text="@string/Details"
         android:textAlignment="center"
         android:textColor="@color/black_opacity_87"
-        android:textSize="20dp"
+        android:padding="8dp"
+        android:textSize="20sp"
         tools:ignore="UnknownId" />
 
     <EditText
         android:id="@+id/PName"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-
         android:background="@drawable/buttonlayout1"
         android:layout_alignStart="@+id/PhnNumber"
         android:layout_below="@+id/Details"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="45dp"
         android:ems="10"
         android:hint="@string/Fullnam"
         android:inputType="textPersonName" />
@@ -78,7 +76,7 @@
         android:layout_alignEnd="@+id/PsNum"
         android:text="@string/Opt"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/saveinfo"
@@ -111,7 +109,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-18dp"
         android:ems="10"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:inputType="numberPassword" />
 
 

@@ -29,6 +29,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.university.soa.bus.SeatClass.OnSeatSelected;
 import com.university.soa.bus.SeatClass.SeatSelection;
 
+import org.parceler.Parcels;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -50,6 +52,7 @@ public class SavedSeats extends AppCompatActivity  {
     TextView T1, T2;
     SharedPreferences seats;
     Set<String> selected;
+    BookingInfo info;
 
     List<Integer> selectSeats = new ArrayList<>();
     String str_name, str_empcode, str_psnum, str_phnmber, emp_code,number;
@@ -258,11 +261,17 @@ public class SavedSeats extends AppCompatActivity  {
 
 
         Toast.makeText(SavedSeats.this, "Seat nos.- "+printSelected(selectSeats), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, TicketActivity.class);
+        info.emp_name = str_name;
+        info.emp_code = str_empcode;
+        info.phoneNo = str_phnmber;
+        info.passNo = str_psnum;
+        intent.putExtra("info", Parcels.wrap(info));
+        startActivity(intent);
     }
 
     private String printSelected(List<Integer> selectedSeats) {
         StringBuilder result = new StringBuilder();
-        String[] seats = selectedSeats.toArray(new String[selectedSeats.size()]);
 
         for (int i = 0; i < selectedSeats.size(); i++) {
             if (i == selectedSeats.size() - 1) {

@@ -10,10 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.university.soa.bus.BookingInfo;
 import com.university.soa.bus.R;
 import com.university.soa.bus.RadioButton.checkbox;
 import com.university.soa.bus.RadioButton.checkbox1;
 
+import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
 public class TourSelection extends AppCompatActivity {
@@ -22,6 +24,7 @@ public class TourSelection extends AppCompatActivity {
     LinearLayout ll;
     TextView t1;
     String str_empcode;
+    BookingInfo info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,9 @@ public class TourSelection extends AppCompatActivity {
         if (getIntent() != null && getIntent().getExtras() != null
                 && getIntent().hasExtra("employee")) {
             str_empcode = getIntent().getStringExtra("employee");
+            info = new BookingInfo();
+            info = Parcels.unwrap(getIntent().getParcelableExtra("info"));
+
         }
 
         ll = findViewById(R.id.layout1);
@@ -51,6 +57,8 @@ public class TourSelection extends AppCompatActivity {
                 Intent myIntent = new Intent(TourSelection.this,
                         checkbox.class);
                 myIntent.putExtra("employee", str_empcode + "T1");
+                info.tour_name = mtour1.getText().toString();
+                myIntent.putExtra("info", Parcels.wrap(info));
                 startActivity(myIntent);
             }
         });
@@ -61,6 +69,8 @@ public class TourSelection extends AppCompatActivity {
                 Intent myIntent = new Intent(TourSelection.this,
                         checkbox1.class);
                 myIntent.putExtra("employee", str_empcode + "T2");
+                info.tour_name = mtour2.getText().toString();
+                myIntent.putExtra("info", Parcels.wrap(info));
                 startActivity(myIntent);
             }
         });
@@ -71,6 +81,8 @@ public class TourSelection extends AppCompatActivity {
                 Intent myIntent = new Intent(TourSelection.this,
                         SeatSelection.class);
                 myIntent.putExtra("employee", str_empcode + "T3");
+                info.tour_name = mtour3.getText().toString();
+                myIntent.putExtra("info", Parcels.wrap(info));
                 startActivity(myIntent);
             }
         });
@@ -81,6 +93,8 @@ public class TourSelection extends AppCompatActivity {
                 Intent myIntent = new Intent(TourSelection.this,
                         SeatSelection.class);
                 myIntent.putExtra("employee", str_empcode + "T4");
+                info.tour_name = mtour4.getText().toString();
+                myIntent.putExtra("info", Parcels.wrap(info));
                 startActivity(myIntent);
             }
         });
@@ -91,6 +105,8 @@ public class TourSelection extends AppCompatActivity {
                 Intent myIntent = new Intent(TourSelection.this,
                         SeatSelection.class);
                 myIntent.putExtra("employee", str_empcode + "T5");
+                info.tour_name = mtour5.getText().toString();
+                myIntent.putExtra("info", Parcels.wrap(info));
                 startActivity(myIntent);
             }
         });
@@ -101,6 +117,8 @@ public class TourSelection extends AppCompatActivity {
                 Intent myIntent = new Intent(TourSelection.this,
                         SeatSelection.class);
                 myIntent.putExtra("employee", str_empcode + "T6");
+                info.tour_name = mtour6.getText().toString();
+                myIntent.putExtra("info", Parcels.wrap(info));
                 startActivity(myIntent);
             }
         });

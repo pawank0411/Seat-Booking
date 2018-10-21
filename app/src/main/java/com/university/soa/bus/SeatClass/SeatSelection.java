@@ -17,10 +17,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.university.soa.bus.BookingInfo;
 import com.university.soa.bus.R;
 import com.university.soa.bus.SavedSeats;
 import com.university.soa.bus.book;
 import com.university.soa.bus.utils.RecyclerViewItemDecorator;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +45,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
     SharedPreferences seats;
     SharedPreferences.Editor edit;
     List<Integer> selectedSeats = new ArrayList<>();
+    BookingInfo info;
 
 
     @Override
@@ -52,6 +56,8 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
         if (getIntent() != null && getIntent().getExtras() != null
                 && getIntent().hasExtra("employee")) {
             str_empcode = getIntent().getStringExtra("employee");
+            info = new BookingInfo();
+            info = Parcels.unwrap(getIntent().getParcelableExtra("info"));
         }
 
         mBook = findViewById(R.id.button2);
@@ -86,8 +92,10 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
                     Intent myIntent = new Intent(SeatSelection.this,
                             SavedSeats.class);
                     myIntent.putExtra("employee", str_empcode);
-                    myIntent.putIntegerArrayListExtra("seats",
-                            (ArrayList<Integer>) selectedSeats);
+                    /*myIntent.putIntegerArrayListExtra("seats",
+                            (ArrayList<Integer>) selectedSeats);*/
+                    info.seats = selectedSeats;
+                    myIntent.putExtra("info", Parcels.wrap(info));
                     startActivity(myIntent);
                 }
             }

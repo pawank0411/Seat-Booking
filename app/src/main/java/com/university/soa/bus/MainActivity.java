@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.parceler.Parcels;
+
 import java.util.Properties;
 
 import Models.AppStatus;
@@ -118,8 +120,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "Welcome User",
                             Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, book.class);
+                    BookingInfo info = new BookingInfo();
+                    info.emp_name = str_empcode;
+                    intent.putExtra("info", Parcels.wrap(info));
                     startActivity(intent);
-                } else if (str_empcode.equals("1234")) {
+                }/* else if (str_empcode.equals("1234")) {
                     Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this, book.class));
 
@@ -132,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(new Intent(MainActivity.this, book.class));
 
 
-                }
+                }*/
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "We did not find any account with the given Employee Code in this device", Toast.LENGTH_LONG).show();
             }
