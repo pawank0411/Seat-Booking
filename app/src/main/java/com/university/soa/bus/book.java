@@ -28,17 +28,12 @@ public class book extends AppCompatActivity {
 
 
     Button B1, B2, B3;
-    String str_empcode, date;
+    String str_empcode = "", date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book);
-
-        if (getIntent() != null && getIntent().getExtras() != null
-                && getIntent().hasExtra("employee")) {
-            str_empcode = getIntent().getStringExtra("employee");
-        }
 
         B1 = findViewById(R.id.button7);
         B2 = findViewById(R.id.button9);

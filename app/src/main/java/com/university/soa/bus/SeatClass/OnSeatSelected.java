@@ -1,5 +1,6 @@
 package com.university.soa.bus.SeatClass;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -8,5 +9,5 @@ import java.util.Set;
 
 public interface OnSeatSelected {
 
-    void onSeatSelected(int count, Set<String> selected);
+    void onSeatSelected(Set<String> selected, List<Integer> seats);
 }

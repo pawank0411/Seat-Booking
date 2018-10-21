@@ -41,6 +41,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
     String str_empcode;
     SharedPreferences seats;
     SharedPreferences.Editor edit;
+    List<Integer> selectedSeats = new ArrayList<>();
 
 
     @Override
@@ -85,6 +86,8 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
                     Intent myIntent = new Intent(SeatSelection.this,
                             SavedSeats.class);
                     myIntent.putExtra("employee", str_empcode);
+                    myIntent.putIntegerArrayListExtra("seats",
+                            (ArrayList<Integer>) selectedSeats);
                     startActivity(myIntent);
                 }
             }
@@ -109,10 +112,15 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
     }
 
     @Override
-    public void onSeatSelected(int count, Set<String> selected) {
-        bookCount = count;
+    public void onSeatSelected(Set<String> selected, List<Integer> seats) {
+        bookCount = seats.size();
         positions = selected;
-        showToast(positions.size() + "seats selected");
+        selectedSeats = seats;
+        if (seats.size() == 1) {
+            showToast(seats.size() + "seat selected");
+        } else {
+            showToast(seats.size() + "seats selected");
+        }
     }
 
 }

@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import java.util.ArrayList;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +51,7 @@ public class SavedSeats extends AppCompatActivity  {
     SharedPreferences seats;
     Set<String> selected;
 
-
+    List<Integer> selectSeats = new ArrayList<>();
     String str_name, str_empcode, str_psnum, str_phnmber, emp_code,number;
     EditText Pname, Pnumber, Empcode, passnumber, editText2;
     private static final String TAG = "PhoneLogin";
@@ -81,6 +82,7 @@ public class SavedSeats extends AppCompatActivity  {
         if (getIntent() != null && getIntent().getExtras() != null
                 && getIntent().hasExtra("employee")) {
             emp_code = getIntent().getStringExtra("employee");
+            selectSeats = getIntent().getIntegerArrayListExtra("seats");
         }
 
         selected = new HashSet<>();
@@ -152,7 +154,7 @@ public class SavedSeats extends AppCompatActivity  {
 
                                 /**Add your number here*/
 
-                                number = "9669553697";
+                                number = "9131341690";
                                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
                                         "+91 " + number,
                                         60,
@@ -169,6 +171,29 @@ public class SavedSeats extends AppCompatActivity  {
                                 passnumber.setVisibility(INVISIBLE);
                                 button.setVisibility(VISIBLE);
                                 editText2.setVisibility(VISIBLE);
+                            }
+
+                            else if (str_empcode.equals("1234")) {
+
+                                    /**Add your number here*/
+
+                                    number = "8462935367";
+                                    PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                                            "+91 " + number,
+                                            60,
+                                            java.util.concurrent.TimeUnit.SECONDS,
+                                            SavedSeats.this,
+                                            mCallbacks);
+
+                                    T2.setText("Please Enter the OTP Send to Your Registered Mobile Number " + number);
+                                    T1.setVisibility(INVISIBLE);
+                                    Saveinfo.setVisibility(INVISIBLE);
+                                    Pname.setVisibility(INVISIBLE);
+                                    Pnumber.setVisibility(INVISIBLE);
+                                    Empcode.setVisibility(INVISIBLE);
+                                    passnumber.setVisibility(INVISIBLE);
+                                    button.setVisibility(VISIBLE);
+                                    editText2.setVisibility(VISIBLE);
                             } else {
                                 Toast.makeText(SavedSeats.this, "Invalid Employee Code", Toast.LENGTH_SHORT).show();
                             }
@@ -179,7 +204,8 @@ public class SavedSeats extends AppCompatActivity  {
                 } else {
                     Toast.makeText(getApplicationContext(), "Please see that you have Active internet connection..", Toast.LENGTH_LONG).show();
                 }
-}
+
+            }
         });
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -188,10 +214,15 @@ public class SavedSeats extends AppCompatActivity  {
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, editText2.getText().toString());
                 signInWithPhoneAuthCredential(credential);
                store();
+
             }
- });
-}
-       private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+
+
+        });
+
+    }
+
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -219,24 +250,26 @@ public class SavedSeats extends AppCompatActivity  {
         str_phnmber = Pnumber.getText().toString().trim();
         str_psnum = passnumber.getText().toString().trim();
         Log.i("Seats", "Selected: " + selected);
-        
-        ref.child(str_empcode).push().setValue(String.valueOf(selected));
-      
+        //Addata ad = new Addata(str_name, str_empcode, str_phnmber, str_psnum);
+        //positions1.remove(positions);
+        // String b = String.valueOf(seats.getStringSet("s", positions));
+        ref.child(str_empcode).push().setValue(String.valueOf(selectSeats));
+        // Toast.makeText(this, "multiple", Toast.LENGTH_SHORT).show();
 
 
-        Toast.makeText(SavedSeats.this, "Seat no.- "+printSelected(selected), Toast.LENGTH_LONG).show();
+        Toast.makeText(SavedSeats.this, "Seat nos.- "+printSelected(selectSeats), Toast.LENGTH_LONG).show();
     }
 
-    private String printSelected(Set<String> selectedSeats) {
+    private String printSelected(List<Integer> selectedSeats) {
         StringBuilder result = new StringBuilder();
         String[] seats = selectedSeats.toArray(new String[selectedSeats.size()]);
 
-        for (int i = 0; i < seats.length; i++) {
-            if (i == seats.length - 1) {
-                result.append(seats[i]);
+        for (int i = 0; i < selectedSeats.size(); i++) {
+            if (i == selectedSeats.size() - 1) {
+                result.append(selectedSeats.get(i));
                 result.append(".");
             } else {
-                result.append(seats[i]);
+                result.append(selectedSeats.get(i));
                 result.append(", ");
             }
         }

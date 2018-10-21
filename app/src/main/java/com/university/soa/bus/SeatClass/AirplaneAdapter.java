@@ -129,7 +129,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                     else {
                         Toast.makeText(mContext, "Seat already booked", Toast.LENGTH_SHORT).show();
                     }
-                    mOnSeatSelected.onSeatSelected(getSelectedItemCount(), positions);
+                    mOnSeatSelected.onSeatSelected(positions, getSelectedItems());
                 }
             });
 
@@ -165,7 +165,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                         Toast.makeText(mContext, "Seat already booked", Toast.LENGTH_SHORT).show();
 
                     }
-                    mOnSeatSelected.onSeatSelected(getSelectedItemCount(), positions);
+                    mOnSeatSelected.onSeatSelected(positions, getSelectedItems());
                 }
             });
 
