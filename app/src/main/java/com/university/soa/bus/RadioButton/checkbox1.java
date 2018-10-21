@@ -29,6 +29,8 @@ public class checkbox1 extends Activity {
         if (getIntent() != null && getIntent().getExtras() != null
                 && getIntent().hasExtra("employee")) {
             str_empcode = getIntent().getStringExtra("employee");
+            info = Parcels.unwrap(getIntent().getParcelableExtra("info"));
+
         }
         R1 = findViewById(R.id.Opt1);
         R2 = findViewById(R.id.Opt2);
