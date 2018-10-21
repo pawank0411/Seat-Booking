@@ -26,11 +26,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".SeatClass$SeatSelection" />
+        <activity android:name=".SeatClass.SeatSelection" />
         <activity android:name=".LoginRegistration" />
-        <activity android:name=".RadioButton$checkbox" />
-        <activity android:name=".RadioButton$checkbox1" />
-        <activity android:name=".SeatClass$TourSelection" />
+        <activity android:name=".RadioButton.checkbox" />
+        <activity android:name=".RadioButton.checkbox1" />
+        <activity android:name=".SeatClass.TourSelection" />
         <activity android:name=".book"
             android:launchMode="singleTop"/>
         <activity android:name=".SavedSeats"

@@ -272,7 +272,6 @@ public class SavedSeats extends AppCompatActivity  {
 
     private String printSelected(List<Integer> selectedSeats) {
         StringBuilder result = new StringBuilder();
-        String[] seats = selectedSeats.toArray(new String[selectedSeats.size()]);
 
         for (int i = 0; i < selectedSeats.size(); i++) {
             if (i == selectedSeats.size() - 1) {

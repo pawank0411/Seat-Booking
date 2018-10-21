@@ -18,7 +18,7 @@ public class TicketActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticket);
+        setContentView(R.layout.ticket);
         title = findViewById(R.id.title);
         tour = findViewById(R.id.tour_name);
         dateTime = findViewById(R.id.date_time);
