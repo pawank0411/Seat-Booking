@@ -249,14 +249,10 @@ public class SavedSeats extends AppCompatActivity {
         str_phnmber = Pnumber.getText().toString().trim();
         str_psnum = passnumber.getText().toString().trim();
         Log.i("Seats", "Selected: " + selected);
-        //Addata ad = new Addata(str_name, str_empcode, str_phnmber, str_psnum);
-        //positions1.remove(positions);
-        // String b = String.valueOf(seats.getStringSet("s", positions));
+        
         ref.child(str_empcode).push().setValue(String.valueOf(selected));
-        // Toast.makeText(this, "multiple", Toast.LENGTH_SHORT).show();
-
-
-        Toast.makeText(SavedSeats.this, printSelected(selectSeats), Toast.LENGTH_LONG).show();
+        
+       Toast.makeText(SavedSeats.this, printSelected(selectSeats), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, TicketActivity.class);
         info.emp_name = str_name;
         info.emp_code = str_empcode;
@@ -264,6 +260,21 @@ public class SavedSeats extends AppCompatActivity {
         info.passNo = str_psnum;
         intent.putExtra("info", Parcels.wrap(info));
         startActivity(intent);
+        
+          /***Check here
+         Map<String,String> userdata=new HashMap<>();
+
+            userdata.put("Employee name",info.emp_name);
+            userdata.put("Employee code",info.emp_code);
+            userdata.put("Passenger's Phone no.",info.phoneNo);
+            userdata.put("Pass no.",info.passNo);
+            userdata.put("Journey Date",info.date);
+            userdata.put("Route",info.tour_name);
+            userdata.put("Timmings",info.timing);
+            userdata.put("Seats",String.valueOf(info.seats));
+
+            ref.push().setValue(userdata);
+        */
     }
 
     private String printSelected(List<Integer> selectedSeats) {
