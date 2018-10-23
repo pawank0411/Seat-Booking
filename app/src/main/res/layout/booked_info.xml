@@ -1,94 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:theme="@style/AppTheme.NoActionBar"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/Details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:fontFamily="serif"
+        android:padding="8dp"
         android:text="@string/Details"
         android:textAlignment="center"
         android:textColor="@color/black_opacity_87"
-        android:padding="8dp"
-        android:textSize="20sp"
+        android:textSize="19sp"
+        android:textStyle="bold"
         tools:ignore="UnknownId" />
 
-    <EditText
-        android:id="@+id/PName"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:background="@drawable/buttonlayout1"
-        android:layout_alignStart="@+id/PhnNumber"
-        android:layout_below="@+id/Details"
-        android:layout_marginTop="45dp"
-        android:ems="10"
-        android:hint="@string/Fullnam"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/EmpCode"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignEnd="@+id/Details"
-        android:layout_below="@+id/PsNum"
-        android:layout_marginTop="18dp"
-        android:background="@drawable/buttonlayout1"
-        android:ems="10"
-        android:hint="@string/EmpCode"
-        android:inputType="phone" />
-
-    <EditText
-        android:id="@+id/PhnNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignStart="@+id/PsNum"
-        android:layout_below="@+id/PName"
-        android:layout_marginTop="17dp"
-        android:background="@drawable/buttonlayout1"
-        android:ems="10"
-        android:hint="@string/PhnNumber"
-        android:inputType="phone" />
-
-    <EditText
-        android:id="@+id/PsNum"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-
-        android:layout_alignStart="@+id/EmpCode"
-        android:layout_below="@+id/PhnNumber"
-        android:layout_marginTop="18dp"
-        android:background="@drawable/buttonlayout1"
-        android:ems="10"
-        android:hint="@string/PsNum"
-        android:inputType="phone" />
-
-    <TextView
-        android:id="@+id/Opt"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
-        android:layout_alignBaseline="@+id/PsNum"
-        android:layout_alignBottom="@+id/PsNum"
-        android:layout_alignEnd="@+id/PsNum"
-        android:text="@string/Opt"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/saveinfo"
-        android:layout_width="wrap_content"
-        android:background="@drawable/buttonlayout"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+    <View
+        android:id="@+id/div"
+        android:layout_width="280dp"
+        android:layout_height="0.2dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="28dp"
-        android:text="@string/Save" />
+        android:layout_marginTop="50dp"
+        android:background="@android:color/darker_gray"
+        android:fontFamily="sans-serif"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cards"
+        android:layout_width="match_parent"
+        android:layout_height="431dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="3dp" android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="431dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="26dp"
+            android:paddingLeft="70dp"
+            android:paddingRight="90dp">
 
 
+            <EditText
+                android:id="@+id/PName"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="54dp"
+                android:ems="10"
+                android:hint="@string/Fullnam"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/PhnNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_below="@+id/PName"
+                android:layout_centerHorizontal="true"
+                android:ems="10"
+                android:hint="@string/PhnNumber"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/PsNum"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+
+                android:layout_below="@+id/PhnNumber"
+                android:layout_centerHorizontal="true"
+                android:ems="10"
+                android:hint="@string/PsNum"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/EmpCode"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_below="@+id/PsNum"
+                android:layout_centerHorizontal="true"
+                android:ems="10"
+                android:hint="@string/EmpCode"
+                android:inputType="phone" />
+
+            <Button
+                android:id="@+id/saveinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="83dp"
+                android:background="@drawable/buttonlayout"
+                android:text="@string/Save" />
+
+            <TextView
+                android:id="@+id/Opt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/PsNum"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="88dp"
+                android:text="@string/Opt"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
         android:id="@+id/card"
         android:layout_width="293dp"
