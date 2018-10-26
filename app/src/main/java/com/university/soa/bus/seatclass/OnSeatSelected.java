@@ -1,4 +1,4 @@
-package com.university.soa.bus.SeatClass;
+package com.university.soa.bus.seatclass;
 
 import java.util.List;
 import java.util.Set;

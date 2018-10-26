@@ -1,4 +1,4 @@
-package com.university.soa.bus.SeatClass;
+package com.university.soa.bus.seatclass;
 
 /**
  * Created by pkumar on 5/6/18.

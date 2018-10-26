@@ -32,15 +32,15 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name=".SeatClass.SeatSelection" />
-       <activity android:name=".RadioButton.checkbox" />
-        <activity android:name=".RadioButton.checkbox1" />
-        <activity android:name=".SeatClass.TourSelection" />
-        <activity android:name=".book"
+        <activity android:name=".seatclass.SeatSelection" />
+       <activity android:name=".radiobutton.Checkbox" />
+        <activity android:name=".radiobutton.Checkbox1" />
+        <activity android:name=".seatclass.TourSelection" />
+        <activity android:name=".Book"
             android:launchMode="singleTop"/>
         <activity android:name=".SavedSeats"
             android:launchMode="singleTop"/>
-        <activity android:name=".SeatClass.TicketActivity"
+        <activity android:name=".TicketActivity"
             android:launchMode="singleTop"/>
     </application>
 

@@ -1,4 +1,4 @@
-package com.university.soa.bus.RadioButton;
+package com.university.soa.bus.radiobutton;
 
 /**
  * Created by pkumar on 5/6/18.
@@ -13,7 +13,7 @@ import android.widget.RadioButton;
 
 import com.university.soa.bus.BookingInfo;
 import com.university.soa.bus.R;
-import com.university.soa.bus.SeatClass.SeatSelection;
+import com.university.soa.bus.seatclass.SeatSelection;
 
 import org.parceler.Parcels;
 
