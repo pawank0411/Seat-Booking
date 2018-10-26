@@ -3,6 +3,7 @@
     package="com.university.soa.bus">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -13,8 +14,9 @@
         android:theme="@style/AppTheme"
         android:fullBackupContent="false">
         <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:screenOrientation="portrait"
+            android:name=".SplashActivity"
+           android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,16 +28,19 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity android:name=".SeatClass.SeatSelection" />
-        <activity android:name=".LoginRegistration" />
-        <activity android:name=".RadioButton.Checkbox" />
-        <activity android:name=".RadioButton.Checkbox1" />
+       <activity android:name=".RadioButton.checkbox" />
+        <activity android:name=".RadioButton.checkbox1" />
         <activity android:name=".SeatClass.TourSelection" />
-        <activity android:name=".Book"
+        <activity android:name=".book"
             android:launchMode="singleTop"/>
         <activity android:name=".SavedSeats"
             android:launchMode="singleTop"/>
-        <activity android:name=".TicketActivity"
+        <activity android:name=".SeatClass.TicketActivity"
             android:launchMode="singleTop"/>
     </application>
 
