@@ -1,7 +1,6 @@
 package com.university.soa.bus.SeatClass;
 
 import android.content.Intent;
-import android.net.LinkAddress;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,11 +11,10 @@ import android.widget.TextView;
 
 import com.university.soa.bus.BookingInfo;
 import com.university.soa.bus.R;
-import com.university.soa.bus.RadioButton.checkbox;
-import com.university.soa.bus.RadioButton.checkbox1;
+import com.university.soa.bus.RadioButton.Checkbox;
+import com.university.soa.bus.RadioButton.Checkbox1;
 
 import org.parceler.Parcels;
-import org.w3c.dom.Text;
 
 public class TourSelection extends AppCompatActivity {
     Button mtour1, mtour2, mtour3, mtour4, mtour5, mtour6;
@@ -55,7 +53,7 @@ public class TourSelection extends AppCompatActivity {
 
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
-                        checkbox.class);
+                        Checkbox.class);
                 myIntent.putExtra("employee", str_empcode + "T1");
                 info.tour_name = mtour1.getText().toString();
                 myIntent.putExtra("info", Parcels.wrap(info));
@@ -67,7 +65,7 @@ public class TourSelection extends AppCompatActivity {
 
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
-                        checkbox1.class);
+                        Checkbox1.class);
                 myIntent.putExtra("employee", str_empcode + "T2");
                 info.tour_name = mtour2.getText().toString();
                 myIntent.putExtra("info", Parcels.wrap(info));

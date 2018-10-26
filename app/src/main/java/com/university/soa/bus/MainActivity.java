@@ -99,19 +99,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                                 /*else if(str_empcode.equals("1234")){
                                         Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
-                                        Intent intent=new Intent(MainActivity.this,book.class);
+                                        Intent intent=new Intent(MainActivity.this,Book.class);
                                         startActivity(intent);
 
                                 }
                                 else if(str_empcode.equals("0000")){
                                         Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
-                                        Intent intent=new Intent(MainActivity.this,book.class);
+                                        Intent intent=new Intent(MainActivity.this,Book.class);
                                         startActivity(intent);
 
                                 }
                                 else if(str_empcode.equals("1111")){
                                         Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
-                                        Intent intent=new Intent(MainActivity.this,book.class);
+                                        Intent intent=new Intent(MainActivity.this,Book.class);
                                         startActivity(intent);
 
                                 }*/
@@ -119,22 +119,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         || str_empcode.equals("1111")) {
                     Toast.makeText(this, "Welcome User",
                             Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, book.class);
+                    Intent intent = new Intent(MainActivity.this, Book.class);
                     BookingInfo info = new BookingInfo();
                     info.emp_name = str_empcode;
                     intent.putExtra("info", Parcels.wrap(info));
                     startActivity(intent);
                 }/* else if (str_empcode.equals("1234")) {
                     Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, book.class));
+                    startActivity(new Intent(MainActivity.this, Book.class));
 
                 } else if (str_empcode.equals("0000")) {
                     Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, book.class));
+                    startActivity(new Intent(MainActivity.this, Book.class));
 
                 } else if (str_empcode.equals("1111")) {
                     Toast.makeText(this, "Welcome User", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, book.class));
+                    startActivity(new Intent(MainActivity.this, Book.class));
 
 
                 }*/

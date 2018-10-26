@@ -5,12 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.university.soa.bus.RadioButton.checkbox;
 import com.university.soa.bus.SeatClass.TourSelection;
 
 import org.parceler.Parcels;
@@ -20,13 +15,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import Models.AppStatus;
-
 /**
  * Created by pkumar on 5/14/18.
  */
 
-public class book extends AppCompatActivity {
+public class Book extends AppCompatActivity {
 
 
     Button B1, B2, B3;
@@ -57,7 +50,7 @@ public class book extends AppCompatActivity {
         B1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(book.this, TourSelection.class);
+                Intent intent = new Intent(Book.this, TourSelection.class);
                 intent.putExtra("employee", str_empcode + "D1");
                 info = new BookingInfo();
                 info.date = B1.getText().toString();
@@ -73,7 +66,7 @@ public class book extends AppCompatActivity {
         B3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(book.this, TourSelection.class);
+                Intent intent = new Intent(Book.this, TourSelection.class);
                 intent.putExtra("employee", str_empcode + "D2");
                 info.date = B3.getText().toString();
                 intent.putExtra("info", Parcels.wrap(info));
@@ -88,7 +81,7 @@ public class book extends AppCompatActivity {
         B2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(book.this, TourSelection.class);
+                Intent intent = new Intent(Book.this, TourSelection.class);
                 intent.putExtra("employee", str_empcode + "D3");
                 info.date = B2.getText().toString();
                 intent.putExtra("info", Parcels.wrap(info));
