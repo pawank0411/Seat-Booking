@@ -1,4 +1,5 @@
 package com.university.soa.bus;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,23 +22,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.university.soa.bus.SeatClass.OnSeatSelected;
-import com.university.soa.bus.SeatClass.SelectableAdapter;
-import com.university.soa.bus.SeatClass.TicketActivity;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import Models.AppStatus;
@@ -61,7 +53,7 @@ public class SavedSeats extends AppCompatActivity {
     TextView T1, T2;
     AppStatus appStatus;
 
-    ;    private String mVerificationId;
+    private String mVerificationId;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private FirebaseAuth mAuth;
@@ -92,14 +84,14 @@ public class SavedSeats extends AppCompatActivity {
         selected = new HashSet<>();
         appStatus = new AppStatus(getApplicationContext());
         Saveinfo = findViewById(R.id.saveinfo);
-       button = findViewById(R.id.button3);
+        button = findViewById(R.id.button3);
         Pname = findViewById(R.id.PName);
         Pnumber = findViewById(R.id.PhnNumber);
         Empcode = findViewById(R.id.EmpCode);
         passnumber = findViewById(R.id.PsNum);
         final CardView cardView=findViewById(R.id.card);
         final CardView cardView1=findViewById(R.id.cards);
-       editText2 = (EditText) findViewById(R.id.editText);
+        editText2 = (EditText) findViewById(R.id.editText);
         T1 = (TextView) findViewById(R.id.Opt);
         T2 = (TextView) findViewById(R.id.Details);
         seats = getSharedPreferences("seats", MODE_PRIVATE);
@@ -218,7 +210,7 @@ public class SavedSeats extends AppCompatActivity {
                                 T2.setText("Please Enter the OTP Send to Your Registered Mobile Number " + number);
                                 cardView1.setVisibility(INVISIBLE);
                                 cardView.setVisibility(VISIBLE);}
-                                else {
+                            else {
                                 Toast.makeText(SavedSeats.this, "Invalid Employee Code", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -227,7 +219,7 @@ public class SavedSeats extends AppCompatActivity {
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Please see that you have Active internet connection..", Toast.LENGTH_LONG).show();
-                    }
+                }
             }
         });
 
@@ -297,7 +289,7 @@ public class SavedSeats extends AppCompatActivity {
 
             */
 
-       // Toast.makeText(getApplicationContext(), "Booked Succesfully..", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getApplicationContext(), "Booked Succesfully..", Toast.LENGTH_SHORT).show();
     }
 
     private String printSelected(List<Integer> selectedSeats) {

@@ -10,8 +10,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.test.ServiceTestCase;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,15 +18,12 @@ import android.widget.Toast;
 import com.university.soa.bus.BookingInfo;
 import com.university.soa.bus.R;
 import com.university.soa.bus.SavedSeats;
-import com.university.soa.bus.book;
 import com.university.soa.bus.utils.RecyclerViewItemDecorator;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 

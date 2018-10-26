@@ -28,10 +28,10 @@
         </activity>
         <activity android:name=".SeatClass.SeatSelection" />
         <activity android:name=".LoginRegistration" />
-        <activity android:name=".RadioButton.checkbox" />
-        <activity android:name=".RadioButton.checkbox1" />
+        <activity android:name=".RadioButton.Checkbox" />
+        <activity android:name=".RadioButton.Checkbox1" />
         <activity android:name=".SeatClass.TourSelection" />
-        <activity android:name=".book"
+        <activity android:name=".Book"
             android:launchMode="singleTop"/>
         <activity android:name=".SavedSeats"
             android:launchMode="singleTop"/>
