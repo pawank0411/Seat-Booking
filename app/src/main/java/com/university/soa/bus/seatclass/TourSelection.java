@@ -1,4 +1,4 @@
-package com.university.soa.bus.SeatClass;
+package com.university.soa.bus.seatclass;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.university.soa.bus.BookingInfo;
 import com.university.soa.bus.R;
-import com.university.soa.bus.RadioButton.Checkbox;
-import com.university.soa.bus.RadioButton.Checkbox1;
+import com.university.soa.bus.radiobutton.Checkbox;
+import com.university.soa.bus.radiobutton.Checkbox1;
 
 import org.parceler.Parcels;
 

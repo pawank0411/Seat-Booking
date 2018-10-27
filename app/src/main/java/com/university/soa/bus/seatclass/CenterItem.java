@@ -1,18 +1,17 @@
-package com.university.soa.bus.SeatClass;
+package com.university.soa.bus.seatclass;
 
 /**
  * Created by pkumar on 5/6/18.
  */
 
-public class EdgeItem extends AbstractItem {
+public class CenterItem extends AbstractItem {
 
     private boolean selectable;
 
-    public EdgeItem(String label) {
+    public CenterItem(String label) {
         super(label);
         selectable=true;
     }
-
 
     boolean isSelectable() {
 
@@ -22,10 +21,9 @@ public class EdgeItem extends AbstractItem {
     void setSelectable(boolean selectable) {
         this.selectable = selectable;
     }
-
     @Override
     public int getType() {
-        return AbstractItem.TYPE_EDGE;
+        return AbstractItem.TYPE_CENTER;
     }
 
 }
