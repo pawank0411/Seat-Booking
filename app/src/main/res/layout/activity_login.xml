@@ -100,18 +100,7 @@
 
             </LinearLayout>
 
-           <Button
-                android:id="@+id/newuser"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:background="?attr/selectableItemBackground"
-                android:text="@string/newuser"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/space"
-                android:textStyle="bold" />
-
+         
         </LinearLayout>
 
     </LinearLayout>
