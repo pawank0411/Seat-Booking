@@ -28,9 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String str_empcode, a, b;
 
     EditText edt_empcode;
-
-    Button newuser;
-
     Button login;
 
     //boolean b=false;
@@ -59,24 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ref = Database.getReference().child("Employee Details : ");
         appStatus = new AppStatus(getApplicationContext());
         login = findViewById(R.id.btn_login);
-
-        newuser = findViewById(R.id.newuser);
         edt_empcode = findViewById(R.id.CodeNum);
-
-
-        newuser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoginRegistration.class));
-            }
-        });
-
-      
-        
-        //OnClickListeners
-        findViewById(R.id.newuser).setOnClickListener(this);
-
-    }
+   }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
