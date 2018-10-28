@@ -21,7 +21,7 @@ import org.parceler.Parcels;
 
 import java.util.Properties;
 
-import Models.AppStatus;
+import models.AppStatus;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
