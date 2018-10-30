@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.university.soa.bus.seatclass.TourSelection;
 
@@ -68,9 +69,14 @@ public class Book extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Book.this, TourSelection.class);
                 intent.putExtra("employee", str_empcode + "D2");
-                info.date = B3.getText().toString();
-                intent.putExtra("info", Parcels.wrap(info));
-                startActivity(intent);
+                try {
+                    info.date = B3.getText().toString();
+                    intent.putExtra("info", Parcels.wrap(info));
+                    startActivity(intent);
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                    Toast.makeText(Book.this,"BookingInfo empty",Toast.LENGTH_LONG).show();
+                }
             }
         });
         c.add(Calendar.DAY_OF_YEAR, 1);
@@ -83,9 +89,14 @@ public class Book extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Book.this, TourSelection.class);
                 intent.putExtra("employee", str_empcode + "D3");
-                info.date = B2.getText().toString();
-                intent.putExtra("info", Parcels.wrap(info));
-                startActivity(intent);
+                try {
+                    info.date = B2.getText().toString();
+                    intent.putExtra("info", Parcels.wrap(info));
+                    startActivity(intent);
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                    Toast.makeText(Book.this,"BookingInfo empty",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
