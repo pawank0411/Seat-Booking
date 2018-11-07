@@ -249,6 +249,7 @@ public class SavedSeats extends AppCompatActivity {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
                                 Toast.makeText(SavedSeats.this, "Invalid Verification", Toast.LENGTH_SHORT).show();
+
                             }
                         }
                     }
