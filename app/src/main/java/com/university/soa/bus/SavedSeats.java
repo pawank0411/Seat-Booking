@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.FirebaseTooManyRequestsException;
@@ -28,8 +30,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import models.AppStatus;
@@ -47,8 +51,8 @@ public class SavedSeats extends AppCompatActivity {
     SharedPreferences seats;
     Set<String> selected;
     List<Integer> selectSeats = new ArrayList<>();
-    String str_name, str_empcode, str_psnum, str_phnmber, emp_code,number;
-    EditText Pname, Pnumber, Empcode, passnumber,editText2;
+    String str_name, str_empcode, str_psnum, str_phnmber, emp_code, number;
+    EditText Pname, Pnumber, Empcode, passnumber, editText2;
     BookingInfo info;
     TextView T1, T2;
     AppStatus appStatus;
@@ -89,11 +93,11 @@ public class SavedSeats extends AppCompatActivity {
         Pnumber = findViewById(R.id.PhnNumber);
         Empcode = findViewById(R.id.EmpCode);
         passnumber = findViewById(R.id.PsNum);
-        final CardView cardView=findViewById(R.id.card);
-        final CardView cardView1=findViewById(R.id.cards);
-        editText2 = (EditText) findViewById(R.id.editText);
-        T1 = (TextView) findViewById(R.id.Opt);
-        T2 = (TextView) findViewById(R.id.Details);
+        final CardView cardView = findViewById(R.id.card);
+        final CardView cardView1 = findViewById(R.id.cards);
+        editText2 = findViewById(R.id.editText);
+        T1 = findViewById(R.id.Opt);
+        T2 = findViewById(R.id.Details);
         seats = getSharedPreferences("seats", MODE_PRIVATE);
         selected = seats.getStringSet(emp_code, new HashSet<String>());
 
@@ -149,18 +153,14 @@ public class SavedSeats extends AppCompatActivity {
                     str_psnum = passnumber.getText().toString().trim();
                     try {
                         if (str_name.length() == 0 && str_empcode.length() == 0 &&
-                                str_phnmber.length() == 0 && str_psnum.length() == 0)
-                        {
+                                str_phnmber.length() == 0 && str_psnum.length() == 0) {
                             Toast.makeText(getApplicationContext(), "Please fill the Details..", Toast.LENGTH_LONG).show();
-                        }
-                        else if (str_name.length() == 0 || str_empcode.length() == 0 ||
+                        } else if (str_name.length() == 0 || str_empcode.length() == 0 ||
                                 str_empcode.length() == 0 || str_empcode.length() == 0) {
                             Toast.makeText(getApplicationContext(), "All fields are Mandatory", Toast.LENGTH_LONG).show();
-                        }
-                        else if (str_empcode.equals(0)) {
+                        } else if (str_empcode.equals(0)) {
                             Toast.makeText(getApplicationContext(), "EMPLOYEE IS MANDATORY", Toast.LENGTH_LONG).show();
-                        }
-                        else if (!str_empcode.equals(0) && !str_name.equals(0) &&
+                        } else if (!str_empcode.equals(0) && !str_name.equals(0) &&
                                 !str_phnmber.equals(0)) {
                             if (str_empcode.equals("1891")) {
                                 number = "9826542127";
@@ -175,7 +175,7 @@ public class SavedSeats extends AppCompatActivity {
                                 cardView1.setVisibility(INVISIBLE);
                                 cardView.setVisibility(VISIBLE);
                             } else if (str_empcode.equals("1234")) {
-                                number = "8457892173";
+                                number = "9131341690";
                                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
                                         "+91 " + number,
                                         60,
@@ -187,9 +187,9 @@ public class SavedSeats extends AppCompatActivity {
                                 cardView1.setVisibility(INVISIBLE);
                                 cardView.setVisibility(VISIBLE);
                             } else if (str_empcode.equals("0000")) {
-                                number = "9165767463";
+                                number = "7036136076";
                                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                                        "+91 " + number,
+                                        "+234 " + number,
                                         60,
                                         java.util.concurrent.TimeUnit.SECONDS,
                                         SavedSeats.this,
@@ -199,9 +199,9 @@ public class SavedSeats extends AppCompatActivity {
                                 cardView1.setVisibility(INVISIBLE);
                                 cardView.setVisibility(VISIBLE);
                             } else if (str_empcode.equals("1111")) {
-                                number = "9131341690";
+                                number = "7036136076";
                                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                                        "+91 " + number,
+                                        "+234 " + number,
                                         60,
                                         java.util.concurrent.TimeUnit.SECONDS,
                                         SavedSeats.this,
@@ -209,8 +209,8 @@ public class SavedSeats extends AppCompatActivity {
 
                                 T2.setText("Please Enter the OTP Send to Your Registered Mobile Number " + number);
                                 cardView1.setVisibility(INVISIBLE);
-                                cardView.setVisibility(VISIBLE);}
-                            else {
+                                cardView.setVisibility(VISIBLE);
+                            } else {
                                 Toast.makeText(SavedSeats.this, "Invalid Employee Code", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -226,9 +226,23 @@ public class SavedSeats extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, editText2.getText().toString());
-                signInWithPhoneAuthCredential(credential);
-                store();
+                if (TextUtils.isEmpty(editText2.getText().toString())) {
+                    editText2.setError("Please enter OTP sent to you");
+                    editText2.requestFocus();
+                } else {
+                    try {
+                        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId,
+                                editText2.getText().toString());
+
+                        signInWithPhoneAuthCredential(credential);
+
+                        store();
+                    } catch (IllegalArgumentException e) {
+                        e.printStackTrace();
+                        editText2.setError("Invalid OTP");
+                        editText2.requestFocus();
+                    }
+                }
 
             }
         });
@@ -244,18 +258,20 @@ public class SavedSeats extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Log.d(TAG, "signInWithCredential:success");
                             Toast.makeText(SavedSeats.this, "Verification Done", Toast.LENGTH_SHORT).show();
-
+                            store();
                         } else {
                             // Log.w(TAG, "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 // The verification code entered was invalid
                                 Toast.makeText(SavedSeats.this, "Invalid Verification", Toast.LENGTH_SHORT).show();
+
                             }
                         }
                     }
                 });
 
     }
+
     public void store() {
         str_name = Pname.getText().toString().trim();
         str_empcode = Empcode.getText().toString().trim();
@@ -263,33 +279,39 @@ public class SavedSeats extends AppCompatActivity {
         str_psnum = passnumber.getText().toString().trim();
         Log.i("Seats", "Selected: " + selected);
 
-        Toast.makeText(SavedSeats.this,"Seat nos. "+ printSelected(selectSeats), Toast.LENGTH_LONG).show();
+        Toast.makeText(SavedSeats.this, "Seat nos. " + printSelected(selectSeats), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, TicketActivity.class);
         info.emp_name = str_name;
         info.emp_code = str_empcode;
         info.phoneNo = str_phnmber;
         info.passNo = str_psnum;
-        intent.putExtra("info", Parcels.wrap(info));
-        startActivity(intent);
 
         /**Check here*/
 
-      /* Map<String,String> userdata=new HashMap<>();
+        final Map<String, String> userdata = new HashMap<>();
 
-            userdata.put("Employee name",info.emp_name);
-            userdata.put("Employee code",info.emp_code);
-            userdata.put("Passenger's Phone no.",info.phoneNo);
-            userdata.put("Pass no.",info.passNo);
-            userdata.put("Journey Date",info.date);
-            userdata.put("Route",info.tour_name);
-            userdata.put("Timmings",info.timing);
-            userdata.put("Seats",String.valueOf(info.seats));
+        userdata.put("Employee name", info.emp_name);
+        /*userdata.put("Employee code", info.emp_code);*/
+        userdata.put("Passenger's Phone Number", info.phoneNo);
+        userdata.put("Pass Number", info.passNo);
+        userdata.put("Journey Date", info.date);
+        userdata.put("Route", info.tour_name);
+        userdata.put("Timmings", info.timing);
+        userdata.put("Seats", String.valueOf(info.seats));
 
-            ref.push().setValue(userdata);
+        ref.child(str_empcode).setValue(userdata).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(getApplicationContext(), "Data for " + emp_code +
+                        "saved successfully", Toast.LENGTH_SHORT).show();
+                Log.e("DataToPlay", "EmpCode: " + emp_code + "\n\n" + userdata.toString());
+            }
+        });
 
-            */
 
         // Toast.makeText(getApplicationContext(), "Booked Succesfully..", Toast.LENGTH_SHORT).show();
+        intent.putExtra("info", Parcels.wrap(info));
+        startActivity(intent);
     }
 
     private String printSelected(List<Integer> selectedSeats) {
