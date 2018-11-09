@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="@dimen/space"
-                android:background="@drawable/greenbutton">
+                >
 
                 <Button
                     android:id="@+id/btn_login"
@@ -98,9 +98,18 @@
                     android:textStyle="bold"
                     android:onClick="onClick"/>
 
-            </LinearLayout>
+                <Button
+                    android:id="@+id/btn_ticket"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="44dp"
+                    android:background="@drawable/buttonlayout"
+                    android:text="SHOW BOOKED TICKET"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text"
+                    android:textStyle="bold"/>
 
-         
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
