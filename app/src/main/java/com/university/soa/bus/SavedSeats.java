@@ -26,6 +26,8 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
+import com.university.soa.bus.SeatClass.TicketActivity;
 
 import org.parceler.Parcels;
 
@@ -36,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import models.AppStatus;
+import Models.AppStatus;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -44,11 +46,11 @@ import static android.view.View.VISIBLE;
 public class SavedSeats extends AppCompatActivity {
 
 
-    DatabaseReference ref;
+    DatabaseReference ref,ref2;
 
 
     Button Saveinfo, button;
-    SharedPreferences seats;
+    SharedPreferences seats,ticket;
     Set<String> selected;
     List<Integer> selectSeats = new ArrayList<>();
     String str_name, str_empcode, str_psnum, str_phnmber, emp_code, number;
@@ -56,6 +58,9 @@ public class SavedSeats extends AppCompatActivity {
     BookingInfo info;
     TextView T1, T2;
     AppStatus appStatus;
+
+
+    SharedPreferences.Editor edit;
 
     private String mVerificationId;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
@@ -99,9 +104,13 @@ public class SavedSeats extends AppCompatActivity {
         T1 = findViewById(R.id.Opt);
         T2 = findViewById(R.id.Details);
         seats = getSharedPreferences("seats", MODE_PRIVATE);
+        ticket = getSharedPreferences("ticket", MODE_PRIVATE);
+        edit = ticket.edit();
         selected = seats.getStringSet(emp_code, new HashSet<String>());
 
         ref = FirebaseDatabase.getInstance().getReference().child("booked details");
+        ref2 = FirebaseDatabase.getInstance().getReference().child("booked seats");
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -187,9 +196,9 @@ public class SavedSeats extends AppCompatActivity {
                                 cardView1.setVisibility(INVISIBLE);
                                 cardView.setVisibility(VISIBLE);
                             } else if (str_empcode.equals("0000")) {
-                                number = "7036136076";
+                                number = "8462935367";
                                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                                        "+234 " + number,
+                                        "+91 " + number,
                                         60,
                                         java.util.concurrent.TimeUnit.SECONDS,
                                         SavedSeats.this,
@@ -235,7 +244,6 @@ public class SavedSeats extends AppCompatActivity {
                                 editText2.getText().toString());
 
                         signInWithPhoneAuthCredential(credential);
-
                         store();
                     } catch (IllegalArgumentException e) {
                         e.printStackTrace();
@@ -299,17 +307,27 @@ public class SavedSeats extends AppCompatActivity {
         userdata.put("Timmings", info.timing);
         userdata.put("Seats", String.valueOf(info.seats));
 
-        ref.child(str_empcode).setValue(userdata).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+
+        /*Gson gson = new Gson();
+        String hashMapString = gson.toJson(userdata);
+
+        edit.putString("ticket",hashMapString).apply();
+        */
+        //all saved seats
+        ref2.push().setValue(String.valueOf(info.seats));
+
+        ref.child(str_empcode).push().setValue(userdata).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(getApplicationContext(), "Data for " + emp_code +
+                /*Toast.makeText(getApplicationContext(), "Data for " + emp_code +
                         "saved successfully", Toast.LENGTH_SHORT).show();
-                Log.e("DataToPlay", "EmpCode: " + emp_code + "\n\n" + userdata.toString());
-            }
+                Log.e("DataToPlay", "EmpCode: " + emp_code + "\n\n" + userdata.toString());*/
+            Toast.makeText(getApplicationContext(), "Booked Succesfully :)", Toast.LENGTH_SHORT).show();
+                }
         });
 
 
-        // Toast.makeText(getApplicationContext(), "Booked Succesfully..", Toast.LENGTH_SHORT).show();
         intent.putExtra("info", Parcels.wrap(info));
         startActivity(intent);
     }
