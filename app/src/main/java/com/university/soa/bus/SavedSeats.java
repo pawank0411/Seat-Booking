@@ -308,15 +308,21 @@ public class SavedSeats extends AppCompatActivity {
         userdata.put("Seats", String.valueOf(info.seats));
 
 
-
-        /*Gson gson = new Gson();
+        //Stored the ticket in shared preference retrive it to showticket class
+        Gson gson = new Gson();
         String hashMapString = gson.toJson(userdata);
 
         edit.putString("ticket",hashMapString).apply();
-        */
+        
         //all saved seats
-        ref2.push().setValue(String.valueOf(info.seats));
+        final Map<String, String> userdata1 = new HashMap<>();
+        userdata1.put("Journey Date", info.date);
+        userdata1.put("Route", info.tour_name);
+        userdata1.put("Timmings", info.timing);
+        userdata1.put("Seats", String.valueOf(info.seats));
+        ref2.push().setValue(userdata1);
 
+        
         ref.child(str_empcode).push().setValue(userdata).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
