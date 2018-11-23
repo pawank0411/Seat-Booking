@@ -1,6 +1,7 @@
 package com.university.soa.bus;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,16 +17,22 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import org.parceler.Parcels;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Showticket extends AppCompatActivity {
 
     DatabaseReference ref;
     FirebaseAuth mAuth;
+    String data;
     private TextView title, tour, dateTime, seatNo, phoneNo, passNo, empName, empCode;
     private Button bookAgain, close;
     private BookingInfo info = new BookingInfo();
+    SharedPreferences ticket;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +49,7 @@ public class Showticket extends AppCompatActivity {
         bookAgain = findViewById(R.id.book_again);
         close = findViewById(R.id.close_logout);
 
+        ticket = getSharedPreferences("ticket",MODE_PRIVATE);
         //Use empcode to retrive the data form firebase accordingly
         Intent intent = getIntent();
         String empcode = intent.getStringExtra("empcode");
@@ -52,12 +60,11 @@ public class Showticket extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-            ref.addValueEventListener(new ValueEventListener() {
+            /*ref.child(empcode).child("-LS0DmmbJJhIh9FTzbxq").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                    String employee_name = dataSnapshot.child("Employee name").getValue().toString();
                     String Journey = dataSnapshot.child("Journey Date").getValue().toString();
+                    String employee_name = dataSnapshot.child("Employee name").getValue().toString();
                     String Passnum = dataSnapshot.child("Pass Number").getValue().toString();
                     String phn = dataSnapshot.child("Passenger's Phone Number").getValue().toString();
                     String route = dataSnapshot.child("Route").getValue().toString();
@@ -66,6 +73,7 @@ public class Showticket extends AppCompatActivity {
 
                     empName.setText(employee_name);
                     tour.setText(Journey);
+
                     passNo.setText(Passnum);
                     phoneNo.setText(phn);
                     dateTime.setText(timmings);
@@ -81,6 +89,15 @@ public class Showticket extends AppCompatActivity {
                 }
             });
 
+            */
+
+
+            // Retrive the data here from hashmap
+        Gson gson = new Gson();
+
+        Map<String,Object> map = new HashMap<String,Object>();
+        map = (Map<String,Object>) gson.fromJson(
+                ticket.getString("ticket",data), map.getClass());
+
         }
     }
-
