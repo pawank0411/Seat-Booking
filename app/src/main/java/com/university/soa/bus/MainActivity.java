@@ -12,17 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Properties;
-
-import Models.AppStatus;
+import models.AppStatus;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -97,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (appStatus.isOnline()) {
                 str_empcode = edt_empcode.getText().toString().trim();
                         SharedPreferences preferences = getSharedPreferences("MYPREFS", MODE_PRIVATE);
-                        try {
+                        //try {
                                 if (str_empcode.length() == 0) {
                                     Toast.makeText(getApplicationContext(),
                                             "Please enter your Employee Code",
@@ -109,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         // pr.dismiss();
                                         Toast.makeText(this, "Welcome User",
                                                 Toast.LENGTH_SHORT).show();
-                                        Intent intent1 = new Intent(MainActivity.this, book.class);
+                                        Intent intent1 = new Intent(MainActivity.this, Book.class);
                                         startActivity(intent1);
                                     }
                                     else {
@@ -117,10 +111,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                 "employee code.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
-                        } catch (Exception e) {
+                        //} catch (Exception e) {
 
-                                Toast.makeText(getApplicationContext(), "We did not find any account with the given Employee Code in this device", Toast.LENGTH_LONG).show();
-                        }
+                                //Toast.makeText(getApplicationContext(), "We did not find any account with the given Employee Code in this device", Toast.LENGTH_LONG).show();
+                        //}
                 } else {
 
                         Toast.makeText(getApplicationContext(), "Please see that you have Active internet connection..", Toast.LENGTH_LONG).show();
