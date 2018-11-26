@@ -121,7 +121,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
     }
 
     private void saveToFirebase(BookingInfo info) {
-        DatabaseReference bookingRef = ref.child("bookings");
+        DatabaseReference bookingRef = ref.child("booked seats");
         bookingRef.push().setValue(info);
     }
 
