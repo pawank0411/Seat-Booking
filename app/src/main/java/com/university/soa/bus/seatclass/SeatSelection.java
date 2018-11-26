@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.university.soa.bus.BookingInfo;
 import com.university.soa.bus.R;
 import com.university.soa.bus.SavedSeats;
@@ -39,6 +41,8 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
     String str_empcode;
     SharedPreferences seats;
     SharedPreferences.Editor edit;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference ref;
     List<Integer> selectedSeats = new ArrayList<>();
     BookingInfo info;
 
@@ -55,6 +59,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
             info = Parcels.unwrap(getIntent().getParcelableExtra("info"));
         }
 
+        ref = database.getReference();
         mBook = findViewById(R.id.button2);
         time = findViewById(R.id.show);
         seats = getSharedPreferences("seats", MODE_PRIVATE);
@@ -90,6 +95,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
                     /*myIntent.putIntegerArrayListExtra("seats",
                             (ArrayList<Integer>) selectedSeats);*/
                     info.seats = selectedSeats;
+                    saveToFirebase(info);
                     myIntent.putExtra("info", Parcels.wrap(info));
                     startActivity(myIntent);
                 }
@@ -112,6 +118,11 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
             mToast.cancel();
         mToast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
         mToast.show();
+    }
+
+    private void saveToFirebase(BookingInfo info) {
+        DatabaseReference bookingRef = ref.child("bookings");
+        bookingRef.push().setValue(info);
     }
 
     @Override
