@@ -4,25 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.university.soa.bus.SeatClass.TicketActivity">
-
+    tools:context=".Showticket">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="141dp"
-        android:text="hello" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="You can check your Saved Tickets by searching UTCL in your File Manager."
+        android:textAlignment="center"
+        android:textSize="13dp"
+        android:visibility="gone"/>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="252dp"
-        android:layout_height="231dp"
-        android:layout_alignParentTop="true"
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+       android:id="@+id/screenshot"
         android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/index" />
+        app:cardCornerRadius="3dp"
+        app:cardElevation="3dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="19dp"
+            android:background="@color/white"
+            android:paddingLeft="30dp"
+            app:srcCompat="@drawable/images"
+            />
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No Recents Tickets Found"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="13dp"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>
