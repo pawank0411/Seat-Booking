@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -44,7 +45,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
     Toast mToast;
     RelativeLayout loading;
     int bookCount = 0;
-    String str_empcode;
+    String str_empcode,emp;
     AirplaneAdapter adapter;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref;
@@ -70,6 +71,9 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
         loading = findViewById(R.id.loading);
 
         mBook.setText(R.string.button2);
+        Intent intent = getIntent();
+        emp = intent.getStringExtra("empcode");
+     //   Toast.makeText(this, emp, Toast.LENGTH_SHORT).show();
 
         List<AbstractItem> items = new ArrayList<>();
         for (int i = 0; i < 40; i++) {
@@ -97,6 +101,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
                     myIntent.putExtra("employee", str_empcode);
                     /*myIntent.putIntegerArrayListExtra("seats",
                             (ArrayList<Integer>) selectedSeats);*/
+                    myIntent.putExtra("empcode",emp);
                     info.seats = selectedSeats;
                     myIntent.putExtra("info", Parcels.wrap(info));
                     startActivity(myIntent);
