@@ -1,8 +1,10 @@
 package com.university.soa.bus;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -26,7 +28,9 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.university.soa.bus.SeatClass.TicketActivity;
+import com.google.gson.Gson;
+import com.university.soa.bus.seatclass.TicketActivity;
+import com.university.soa.bus.seatclass.TourSelection;
 
 import org.parceler.Parcels;
 
@@ -37,7 +41,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import models.AppStatus;
+import Models.AppStatus;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -52,12 +56,12 @@ public class SavedSeats extends AppCompatActivity {
     SharedPreferences seats,ticket;
     Set<String> selected;
     List<Integer> selectSeats = new ArrayList<>();
-    String str_name, str_empcode, str_psnum, str_phnmber, emp_code, number;
+    String str_name, str_empcode, str_psnum, str_phnmber, emp_code, number,emp;
     EditText Pname, Pnumber, Empcode, passnumber, editText2;
     BookingInfo info;
     TextView T1, T2;
     AppStatus appStatus;
-
+    ProgressDialog pr;
 
     SharedPreferences.Editor edit;
 
@@ -89,6 +93,13 @@ public class SavedSeats extends AppCompatActivity {
             info = Parcels.unwrap(savedInstanceState.getParcelable("info"));
         }
 
+
+        Intent intent = getIntent();
+        emp = intent.getStringExtra("empcode");
+
+    // Toast.makeText(SavedSeats.this, emp, Toast.LENGTH_SHORT).show();
+
+
         selected = new HashSet<>();
         appStatus = new AppStatus(getApplicationContext());
         Saveinfo = findViewById(R.id.saveinfo);
@@ -96,6 +107,9 @@ public class SavedSeats extends AppCompatActivity {
         Pname = findViewById(R.id.PName);
         Pnumber = findViewById(R.id.PhnNumber);
         Empcode = findViewById(R.id.EmpCode);
+
+        Empcode.setText(emp);
+
         passnumber = findViewById(R.id.PsNum);
         final CardView cardView = findViewById(R.id.card);
         final CardView cardView1 = findViewById(R.id.cards);
@@ -106,6 +120,8 @@ public class SavedSeats extends AppCompatActivity {
         ticket = getSharedPreferences("ticket", MODE_PRIVATE);
         edit = ticket.edit();
         selected = seats.getStringSet(emp_code, new HashSet<String>());
+
+
 
         ref = FirebaseDatabase.getInstance().getReference().child("booked details");
         ref2 = FirebaseDatabase.getInstance().getReference().child("booked seats");
@@ -121,14 +137,20 @@ public class SavedSeats extends AppCompatActivity {
             public void onVerificationCompleted(PhoneAuthCredential credential) {
                 // Log.d(TAG, "onVerificationCompleted:" + credential);
                 mVerificationInProgress = true;
-                Toast.makeText(SavedSeats.this, "Verification Complete", Toast.LENGTH_SHORT).show();
-                signInWithPhoneAuthCredential(credential);
+               // Toast.makeText(SavedSeats.this, "Verification Complete", Toast.LENGTH_SHORT).show();
+               // signInWithPhoneAuthCredential(credential);
+
+                String code = credential.getSmsCode();
+                editText2.setText(code);
+
             }
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
                 // Log.w(TAG, "onVerificationFailed", e);
-                Toast.makeText(SavedSeats.this, "Verification Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SavedSeats.this, "Verification Failed Check your Internet Connection", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent (SavedSeats.this, MainActivity.class);
+                startActivity(intent);
                 if (e instanceof FirebaseAuthInvalidCredentialsException) {
                     // Invalid request
                     Toast.makeText(SavedSeats.this,
@@ -143,7 +165,25 @@ public class SavedSeats extends AppCompatActivity {
             public void onCodeSent(String verificationId,
                                    PhoneAuthProvider.ForceResendingToken token) {
                 //Log.d(TAG, "onCodeSent:" + verificationId);
-                Toast.makeText(SavedSeats.this, "Verification code has been send on your number", Toast.LENGTH_LONG).show();
+                pr = new ProgressDialog(SavedSeats.this);
+                pr.setMessage("Safe life, Happy life");
+                pr.setCancelable(false);
+                pr.show();
+
+                Runnable progressRunnable = new Runnable() {
+
+                    @Override
+                    public void run() {
+                        pr.cancel();
+                        Toast.makeText(SavedSeats.this, "Verification code has been send on your number", Toast.LENGTH_LONG).show();
+
+                    }
+                };
+
+                Handler pdCanceller = new Handler();
+                pdCanceller.postDelayed(progressRunnable, 3000);
+
+                //Toast.makeText(SavedSeats.this, "Verification code has been send on your number", Toast.LENGTH_LONG).show();
                 // Save verification ID and resending token so we can use them later
                 mVerificationId = verificationId;
                 mResendToken = token;
@@ -182,6 +222,22 @@ public class SavedSeats extends AppCompatActivity {
                                 T2.setText("Please Enter the OTP Send to Your Registered Mobile Number " + number);
                                 cardView1.setVisibility(INVISIBLE);
                                 cardView.setVisibility(VISIBLE);
+                                pr = new ProgressDialog(SavedSeats.this);
+                                pr.setMessage("Safe life, Happy life");
+                                pr.setCancelable(false);
+                                pr.show();
+
+                                Runnable progressRunnable = new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        pr.cancel();
+                                    }
+                                };
+
+                                Handler pdCanceller = new Handler();
+                                pdCanceller.postDelayed(progressRunnable, 3000);
+
                             } else if (str_empcode.equals("1234")) {
                                 number = "9131341690";
                                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -194,8 +250,24 @@ public class SavedSeats extends AppCompatActivity {
                                 T2.setText("Please Enter the OTP Send to Your Registered Mobile Number " + number);
                                 cardView1.setVisibility(INVISIBLE);
                                 cardView.setVisibility(VISIBLE);
+                               /* pr = new ProgressDialog(SavedSeats.this);
+                                pr.setMessage("Safe life, Happy life");
+                                pr.setCancelable(false);
+                                pr.show();
+
+                                Runnable progressRunnable = new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        pr.cancel();
+                                    }
+                                };
+
+                                Handler pdCanceller = new Handler();
+                                pdCanceller.postDelayed(progressRunnable, 2000);
+*/
                             } else if (str_empcode.equals("0000")) {
-                                number = "8462935367";
+                                number = "8889715247";
                                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
                                         "+91 " + number,
                                         60,
@@ -207,9 +279,9 @@ public class SavedSeats extends AppCompatActivity {
                                 cardView1.setVisibility(INVISIBLE);
                                 cardView.setVisibility(VISIBLE);
                             } else if (str_empcode.equals("1111")) {
-                                number = "7036136076";
+                                number = "9669553697";
                                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                                        "+234 " + number,
+                                        "+91 " + number,
                                         60,
                                         java.util.concurrent.TimeUnit.SECONDS,
                                         SavedSeats.this,
@@ -234,21 +306,42 @@ public class SavedSeats extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(editText2.getText().toString())) {
-                    editText2.setError("Please enter OTP sent to you");
-                    editText2.requestFocus();
-                } else {
-                    try {
-                        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId,
-                                editText2.getText().toString());
-
-                        signInWithPhoneAuthCredential(credential);
-                        store();
-                    } catch (IllegalArgumentException e) {
-                        e.printStackTrace();
-                        editText2.setError("Invalid OTP");
+                if(appStatus.isOnline()) {
+                    if (TextUtils.isEmpty(editText2.getText().toString())) {
+                        editText2.setError("Please enter OTP sent to you");
                         editText2.requestFocus();
+                    } else {
+
+                        try {
+                            pr = new ProgressDialog(SavedSeats.this);
+                            pr.setMessage("Safe life, Happy life");
+                            pr.setCancelable(false);
+                            pr.show();
+
+                            Runnable progressRunnable = new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    pr.cancel();
+                                    PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId,
+                                            editText2.getText().toString());
+
+                                    signInWithPhoneAuthCredential(credential);
+                                }
+                            };
+
+                            Handler pdCanceller = new Handler();
+                            pdCanceller.postDelayed(progressRunnable, 3000);
+
+                        } catch (IllegalArgumentException e) {
+                            e.printStackTrace();
+                            editText2.setError("Invalid OTP");
+                            editText2.requestFocus();
+                        }
                     }
+                }else {
+                    Toast.makeText(getApplicationContext(), "Please see that you have Active internet connection..", Toast.LENGTH_LONG).show();
+
                 }
 
             }
@@ -265,7 +358,7 @@ public class SavedSeats extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Log.d(TAG, "signInWithCredential:success");
                             Toast.makeText(SavedSeats.this, "Verification Done", Toast.LENGTH_SHORT).show();
-                            store();
+                             store();
                         } else {
                             // Log.w(TAG, "signInWithCredential:failure", task.getException());
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -286,7 +379,6 @@ public class SavedSeats extends AppCompatActivity {
         str_psnum = passnumber.getText().toString().trim();
         Log.i("Seats", "Selected: " + selected);
 
-        Toast.makeText(SavedSeats.this, "Seat nos. " + printSelected(selectSeats), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, TicketActivity.class);
         info.emp_name = str_name;
         info.emp_code = str_empcode;
@@ -298,7 +390,7 @@ public class SavedSeats extends AppCompatActivity {
         final Map<String, String> userdata = new HashMap<>();
 
         userdata.put("Employee name", info.emp_name);
-        /*userdata.put("Employee code", info.emp_code);*/
+        userdata.put("Employee code", info.emp_code);
         userdata.put("Passenger's Phone Number", info.phoneNo);
         userdata.put("Pass Number", info.passNo);
         userdata.put("Journey Date", info.date);
@@ -308,11 +400,13 @@ public class SavedSeats extends AppCompatActivity {
 
 
         //Stored the ticket in shared preference retrive it to showticket class
-        /*Gson gson = new Gson();
+        Gson gson = new Gson();
         String hashMapString = gson.toJson(userdata);
 
-        edit.putString("ticket",hashMapString).apply();*/
-        
+        edit.putString("ticket",hashMapString).apply();
+        edit.commit();
+
+
         //all saved seats
         final Map<String, String> userdata1 = new HashMap<>();
         userdata1.put("Journey Date", info.date);
@@ -321,7 +415,7 @@ public class SavedSeats extends AppCompatActivity {
         userdata1.put("Seats", String.valueOf(info.seats));
         ref2.push().setValue(userdata1);
 
-        
+
         ref.child(str_empcode).push().setValue(userdata).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
