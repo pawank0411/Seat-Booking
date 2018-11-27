@@ -1,14 +1,19 @@
-package com.university.soa.bus.SeatClass;
+package com.university.soa.bus.seatclass;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Binder;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.text.style.BulletSpan;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +25,7 @@ import com.university.soa.bus.Book;
 import com.university.soa.bus.BookingInfo;
 import com.university.soa.bus.MainActivity;
 import com.university.soa.bus.R;
+import com.university.soa.bus.Showticket;
 
 import org.parceler.Parcels;
 
@@ -32,12 +38,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class TicketActivity extends AppCompatActivity implements View.OnClickListener {
+public class TicketActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView title, tour, dateTime, seatNo, phoneNo, passNo, empName, empCode;
     private Button bookAgain, close,save;
     private ImageView imageView;
     private BookingInfo info = new BookingInfo();
-     int i =0;
+    int i =0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,17 +57,16 @@ public class TicketActivity extends AppCompatActivity implements View.OnClickLis
         passNo = findViewById(R.id.pass_no);
         empName = findViewById(R.id.emp_name);
         empCode = findViewById(R.id.emp_code);
-        bookAgain = findViewById(R.id.book_again);
-        close = findViewById(R.id.close_logout);
-        imageView = findViewById(R.id.imageView4);
 
+       // imageView = findViewById(R.id.imageView4);
+       // bookAgain = findViewById(R.id.book_again);
+        close = findViewById(R.id.close_logout);
         save = findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
 
                 final ConstraintLayout constraintLayout = findViewById(R.id.ticket);
-
                 constraintLayout.post(new Runnable() {
                     @Override
                     public void run() {
@@ -77,6 +83,8 @@ public class TicketActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 });
 
+
+
             }
         });
 
@@ -89,27 +97,41 @@ public class TicketActivity extends AppCompatActivity implements View.OnClickLis
             info = Parcels.unwrap(savedInstanceState.getParcelable("info"));
         }
 
-        bookAgain.setOnClickListener(this);
-        close.setOnClickListener(this);
+
         assert info != null;
         setViews(info);
     }
 
     private Bitmap takeScreenshot(View v){
-        Bitmap screenShot = null;
+       Bitmap screenShot  = null;
 
         try{
             int width = v.getMeasuredWidth();
             int height = v.getMeasuredHeight();
 
-            screenShot = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
+             screenShot = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
+
 
             Canvas c = new Canvas(screenShot);
             v.draw(c);
+           // imageView.setImageBitmap(screenShot);
 
 
 
-        }catch (Exception e){
+          //  Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.index);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            screenShot.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            //textEncode.setText(encodedImage);
+
+            SharedPreferences sharedPreferences = this.getSharedPreferences("pictures",MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("picture",encodedImage);
+            editor.commit();
+
+
+        }catch (Exception e){//
             e.printStackTrace();
         }
         return screenShot;
@@ -145,11 +167,11 @@ public class TicketActivity extends AppCompatActivity implements View.OnClickLis
                     Log.i("MediaScanner", "Scanned " + path + ":");
                     Log.i("MediaScanner", "-> uri=" + uri);
                 }
-                });
+            });
 
         } catch (IOException e) {
-                    e.printStackTrace();
-           }
+            e.printStackTrace();
+        }
     }
 
 
@@ -194,10 +216,10 @@ public class TicketActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.book_again:
-                Intent intent=new Intent(TicketActivity.this, Book.class);
+            /*case R.id.book_again:
+                Intent intent=new Intent(TicketActivity.this, MainActivity.class);
                 startActivity(intent);
-                break;
+                break;*/
             case R.id.close_logout:
                 Intent intent1=new Intent(TicketActivity.this, MainActivity.class);
                 startActivity(intent1);
