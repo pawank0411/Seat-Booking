@@ -2,6 +2,7 @@ package com.university.soa.bus;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -9,19 +10,29 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.util.Base64;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.university.soa.bus.seatclass.TicketActivity;
+
 import java.io.File;
 
-public class Showticket extends AppCompatActivity{
+public class Showticket extends AppCompatActivity {
 
 
     String data;
     private static final int PICKFILE_RESULT_CODE = 1;
-   ImageView tour;
-    TextView text;
+    ImageView tour;
+    TextView text, error;
+    Button bookagain, close;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,97 +40,34 @@ public class Showticket extends AppCompatActivity{
         setContentView(R.layout.show);
 
 
-       text = findViewById(R.id.textView);
-//
+        text = findViewById(R.id.textView1);
+        error = findViewById(R.id.textView2);
+        tour = findViewById(R.id.imageView);
+        CardView cardView = findViewById(R.id.screenshot);
 
-        openFolder();
-       /* Title = findViewById(R.id.title);
-        tour = findViewById(R.id.tour_name);
-        dateTime = findViewById(R.id.date_time);
-        seatNo = findViewById(R.id.seat_no);
-        phoneNo = findViewById(R.id.phone_no);
-        passNo = findViewById(R.id.pass_no);
-        empName = findViewById(R.id.emp_name);
-        empCode = findViewById(R.id.emp_code);
-        bookAgain = findViewById(R.id.book_again);
-        close = findViewById(R.id.close_logout);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("pictures", MODE_PRIVATE);
+        String image = sharedPreferences.getString("picture", "");
 
-        ticket = getSharedPreferences("ticket",MODE_PRIVATE);
-        //Use empcode to retrive the data form firebase accordingly
-        Intent intent = getIntent();
-        String empcode = intent.getStringExtra("empcode");
-
-
-        ref = FirebaseDatabase.getInstance().getReference().child("booked details");
-
-
-        mAuth = FirebaseAuth.getInstance();
-
-            ref.child(empcode).child("-LS0DmmbJJhIh9FTzbxq").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String Journey = dataSnapshot.child("Journey Date").getValue().toString();
-                    String employee_name = dataSnapshot.child("Employee name").getValue().toString();
-                    String Passnum = dataSnapshot.child("Pass Number").getValue().toString();
-                    String phn = dataSnapshot.child("Passenger's Phone Number").getValue().toString();
-                    String route = dataSnapshot.child("Route").getValue().toString();
-                    String seats = dataSnapshot.child("Seats").getValue().toString();
-                    String timmings = dataSnapshot.child("Timmings").getValue().toString();
-
-                    empName.setText(employee_name);
-                    tour.setText(Journey);
-
-                    passNo.setText(Passnum);
-                    phoneNo.setText(phn);
-                    dateTime.setText(timmings);
-                    seatNo.setText(seats);
-                    title.setText(route);
-
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-            */
+        if (!image.equalsIgnoreCase("")) {
+            byte[] b = Base64.decode(image, Base64.DEFAULT);
+            cardView.setVisibility(View.VISIBLE);
+            text.setVisibility(View.VISIBLE);
+            bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+            tour.setImageBitmap(bitmap);
+        } else {
+            cardView.setVisibility(View.INVISIBLE);
+            text.setVisibility(View.INVISIBLE);
+            error.setVisibility(View.VISIBLE);
+        }
 
 
 
-
-    /*    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getPath()
-                + "/Android/data/com.university.soa.bus/files/Tickets/");
-        intent.setDataAndType(uri, "image/png");
-
-        startActivity(Intent.createChooser(intent, "open folder"));
-
-      */
-       /* try {
-            File file = new File(Environment.getExternalStorageDirectory().getPath()
-                    + "/Android/data/com.university.soa.bus/files/Tickets/");
-            Uri uri1 = Uri.fromFile(file);
-            Intent intent1 = new Intent(Intent.ACTION_VIEW);
-            if (file.toString().contains(".png")) {
-                // JPG file
-                intent1.setDataAndType(uri1, "image/jpeg");
-            }
-
-            startActivity(intent1);
-        } catch (Exception e) {
-
-      }
-*/
-
-    }
-    public void openFolder()
+    /*public void openFolder()
     {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getPath()
                 + "no path");
-        intent.setDataAndType(uri, "*/*");
+        intent.setDataAndType(uri, "");
         startActivityForResult(intent,PICKFILE_RESULT_CODE);
     }
     @Override
@@ -138,19 +86,19 @@ public class Showticket extends AppCompatActivity{
                     text.setText(new File(FilePath).getAbsolutePath());
 
 
-                    /** Show the selected image in Image view */
+                    /** Show the selected image in Image view
 
 
                     if(file.exists()){
 
-                       Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                        Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
 
-                       ImageView myImage = (ImageView) findViewById(R.id.imageView);
+                        ImageView myImage = (ImageView) findViewById(R.id.imageView);
 
-                       myImage.setImageBitmap(myBitmap);
+                        myImage.setImageBitmap(myBitmap);
 
 
-                   }
+                    }
                     else {
                         Toast.makeText(this, "can't be converted", Toast.LENGTH_SHORT).show();
                     }
@@ -232,4 +180,5 @@ public class Showticket extends AppCompatActivity{
         Log.d("HMKCODE", "Real Path: "+realPath);
     }
 */
+    }
 }
