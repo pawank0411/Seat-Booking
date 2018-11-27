@@ -24,8 +24,9 @@ public class Book extends AppCompatActivity {
 
 
     Button B1, B2, B3;
-    String str_empcode = "", date;
-    BookingInfo info;
+    String str_empcode = "", date,emp;
+
+    BookingInfo info = new BookingInfo();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class Book extends AppCompatActivity {
         setContentView(R.layout.book);
 
         B1 = findViewById(R.id.button7);
-        B2 = findViewById(R.id.button9);
+       // B2 = findViewById(R.id.button9);
         B3 = findViewById(R.id.button8);
 
         if (getIntent() != null && getIntent().getExtras() != null
@@ -48,6 +49,13 @@ public class Book extends AppCompatActivity {
         String today = df.format(Today.getTime());
         B1.setText(today);
         date = today;
+
+        Intent intent = getIntent();
+        emp = intent.getStringExtra("empcode");
+
+
+     //  Toast.makeText(this, emp, Toast.LENGTH_SHORT).show();
+
         B1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +64,7 @@ public class Book extends AppCompatActivity {
                 info = new BookingInfo();
                 info.date = B1.getText().toString();
                 intent.putExtra("info", Parcels.wrap(info));
+                intent.putExtra("empcode",emp);
                 startActivity(intent);
             }
         });
@@ -69,17 +78,13 @@ public class Book extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Book.this, TourSelection.class);
                 intent.putExtra("employee", str_empcode + "D2");
-                try {
-                    info.date = B3.getText().toString();
-                    intent.putExtra("info", Parcels.wrap(info));
-                    startActivity(intent);
-                }catch (NullPointerException e){
-                    e.printStackTrace();
-                    Toast.makeText(Book.this,"BookingInfo empty",Toast.LENGTH_LONG).show();
-                }
+                info.date = B3.getText().toString();
+                intent.putExtra("info", Parcels.wrap(info));
+                intent.putExtra("empcode",emp);
+                startActivity(intent);
             }
         });
-        c.add(Calendar.DAY_OF_YEAR, 1);
+      /*  c.add(Calendar.DAY_OF_YEAR, 1);
         Date Dtm = c.getTime();
         String dtm = df.format(Dtm.getTime());
         B2.setText(dtm);
@@ -89,16 +94,20 @@ public class Book extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Book.this, TourSelection.class);
                 intent.putExtra("employee", str_empcode + "D3");
-                try {
-                    info.date = B2.getText().toString();
-                    intent.putExtra("info", Parcels.wrap(info));
-                    startActivity(intent);
-                }catch (NullPointerException e){
-                    e.printStackTrace();
-                    Toast.makeText(Book.this,"BookingInfo empty",Toast.LENGTH_LONG).show();
-                }
+                info.date = B2.getText().toString();
+                intent.putExtra("info", Parcels.wrap(info));
+                startActivity(intent);
             }
-        });
+        });*/
     }
 
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 }
