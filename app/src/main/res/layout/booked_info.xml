@@ -98,7 +98,8 @@
                 android:layout_centerHorizontal="true"
                 android:ems="10"
                 android:hint="@string/EmpCode"
-                android:inputType="phone" />
+                android:editable="false"
+                android:inputType="none" />
 
             <Button
                 android:id="@+id/saveinfo"
