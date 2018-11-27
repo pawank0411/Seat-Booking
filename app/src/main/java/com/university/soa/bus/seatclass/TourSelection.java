@@ -8,11 +8,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.university.soa.bus.BookingInfo;
 import com.university.soa.bus.R;
-import com.university.soa.bus.radiobutton.Checkbox;
-import com.university.soa.bus.radiobutton.Checkbox1;
+import com.university.soa.bus.radiobutton.checkbox;
+import com.university.soa.bus.radiobutton.checkbox1;
 
 import org.parceler.Parcels;
 
@@ -21,7 +22,7 @@ public class TourSelection extends AppCompatActivity {
     RelativeLayout Rl;
     LinearLayout ll;
     TextView t1;
-    String str_empcode;
+    String str_empcode,emp;
     BookingInfo info;
 
     @Override
@@ -34,8 +35,7 @@ public class TourSelection extends AppCompatActivity {
             str_empcode = getIntent().getStringExtra("employee");
             info = new BookingInfo();
             info = Parcels.unwrap(getIntent().getParcelableExtra("info"));
-
-        }
+            }
 
         ll = findViewById(R.id.layout1);
         t1 = findViewById(R.id.seat);
@@ -48,15 +48,24 @@ public class TourSelection extends AppCompatActivity {
         mtour6 = findViewById(R.id.Tour6);
         Rl.setVisibility(View.VISIBLE);
         ll.setVisibility(View.GONE);
+
+        Intent intent = getIntent();
+        emp = intent.getStringExtra("empcode");
+        Toast.makeText(this, emp, Toast.LENGTH_SHORT).show();
+
+
+        // Toast.makeText(this, emp, Toast.LENGTH_SHORT).show();
+
         mtour1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
 
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
-                        Checkbox.class);
+                        checkbox.class);
                 myIntent.putExtra("employee", str_empcode + "T1");
                 info.tour_name = mtour1.getText().toString();
                 myIntent.putExtra("info", Parcels.wrap(info));
+                myIntent.putExtra("empcode",emp);
                 startActivity(myIntent);
             }
         });
@@ -65,9 +74,10 @@ public class TourSelection extends AppCompatActivity {
 
                 // Start NewActivity.class
                 Intent myIntent = new Intent(TourSelection.this,
-                        Checkbox1.class);
+                        checkbox1.class);
                 myIntent.putExtra("employee", str_empcode + "T2");
                 info.tour_name = mtour2.getText().toString();
+                myIntent.putExtra("empcode",emp);
                 myIntent.putExtra("info", Parcels.wrap(info));
                 startActivity(myIntent);
             }
@@ -80,6 +90,7 @@ public class TourSelection extends AppCompatActivity {
                         SeatSelection.class);
                 myIntent.putExtra("employee", str_empcode + "T3");
                 info.tour_name = mtour3.getText().toString();
+                myIntent.putExtra("empcode",emp);
                 myIntent.putExtra("info", Parcels.wrap(info));
                 startActivity(myIntent);
             }
@@ -92,6 +103,7 @@ public class TourSelection extends AppCompatActivity {
                         SeatSelection.class);
                 myIntent.putExtra("employee", str_empcode + "T4");
                 info.tour_name = mtour4.getText().toString();
+                myIntent.putExtra("empcode",emp);
                 myIntent.putExtra("info", Parcels.wrap(info));
                 startActivity(myIntent);
             }
@@ -104,6 +116,7 @@ public class TourSelection extends AppCompatActivity {
                         SeatSelection.class);
                 myIntent.putExtra("employee", str_empcode + "T5");
                 info.tour_name = mtour5.getText().toString();
+                myIntent.putExtra("empcode",emp);
                 myIntent.putExtra("info", Parcels.wrap(info));
                 startActivity(myIntent);
             }
@@ -116,6 +129,7 @@ public class TourSelection extends AppCompatActivity {
                         SeatSelection.class);
                 myIntent.putExtra("employee", str_empcode + "T6");
                 info.tour_name = mtour6.getText().toString();
+                myIntent.putExtra("empcode",emp);
                 myIntent.putExtra("info", Parcels.wrap(info));
                 startActivity(myIntent);
             }
