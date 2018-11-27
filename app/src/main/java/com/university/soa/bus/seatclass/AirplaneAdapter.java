@@ -121,14 +121,16 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                 public void onClick(View v) {
                     if(item.isSelectable()) {
                         toggleSelection(position);
-                        if (isSelected(position)) {
-                            SeatSelection.positions.add(position);
-                            selected.add(position);
-                            positions.add(position);
-                        } else if (SeatSelection.positions.contains(position)) {
-                            SeatSelection.positions.remove(position);
-                            selected.remove(position);
-                            positions.remove(position);
+                        if (SeatSelection.positions != null) {
+                            if (isSelected(position)) {
+                                SeatSelection.positions.add(position);
+                                selected.add(position);
+                                positions.add(position);
+                            } else if (SeatSelection.positions.contains(position)) {
+                                SeatSelection.positions.remove(position);
+                                selected.remove(position);
+                                positions.remove(position);
+                            }
                         }
                     }
                     else {
