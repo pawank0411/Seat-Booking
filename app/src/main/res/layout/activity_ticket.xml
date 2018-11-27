@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:id="@+id/ticket"
-    tools:context="com.university.soa.bus.SeatClass.TicketActivity">
+    tools:context="com.university.soa.bus.seatclass.TicketActivity">
 
     <TextView
         android:id="@+id/title"
@@ -154,63 +154,64 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/phone_no" />
 
-            <Button
+        <!--    <Button
                 android:id="@+id/book_again"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="24dp"
                 android:background="@drawable/greenbutton"
                 android:minHeight="16dp"
                 android:minWidth="16dp"
+                android:onClick="onClick"
                 android:paddingBottom="8dp"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:text="Book Again"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.094"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pass_no" />
+                tools:layout_editor_absoluteY="228dp" />
+-->
 
             <Button
                 android:id="@+id/close_logout"
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginEnd="156dp"
+                android:layout_marginTop="44dp"
                 android:background="@drawable/buttonlayout1"
                 android:minHeight="16dp"
                 android:minWidth="16dp"
+                android:onClick="onClick"
                 android:paddingBottom="8dp"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:text="Close "
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.103"
+                app:layout_constraintHorizontal_bias="0.029"
                 app:layout_constraintStart_toEndOf="@+id/book_again"
                 app:layout_constraintTop_toBottomOf="@+id/pass_no" />
 
             <Button
                 android:id="@+id/save"
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
-
-                android:text="Save"
                 android:layout_marginEnd="12dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="44dp"
                 android:background="@drawable/buttonlayout1"
                 android:minHeight="16dp"
                 android:minWidth="16dp"
                 android:paddingBottom="8dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
+                android:paddingEnd="5dp"
+                android:paddingStart="10dp"
                 android:paddingTop="8dp"
+                android:text="Save"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/close_logout"
-                app:layout_constraintTop_toBottomOf="@+id/pass_no"
-                tools:layout_editor_absoluteX="273dp" />
+                app:layout_constraintTop_toBottomOf="@+id/pass_no" />
 
             <ImageView
                 android:id="@+id/imageView4"
