@@ -26,7 +26,6 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.Gson;
 import com.university.soa.bus.SeatClass.TicketActivity;
 
 import org.parceler.Parcels;
@@ -38,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import Models.AppStatus;
+import models.AppStatus;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
@@ -309,10 +308,10 @@ public class SavedSeats extends AppCompatActivity {
 
 
         //Stored the ticket in shared preference retrive it to showticket class
-        Gson gson = new Gson();
+        /*Gson gson = new Gson();
         String hashMapString = gson.toJson(userdata);
 
-        edit.putString("ticket",hashMapString).apply();
+        edit.putString("ticket",hashMapString).apply();*/
         
         //all saved seats
         final Map<String, String> userdata1 = new HashMap<>();

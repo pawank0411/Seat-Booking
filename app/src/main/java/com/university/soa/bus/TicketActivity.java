@@ -3,14 +3,11 @@ package com.university.soa.bus.SeatClass;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.media.Image;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
+import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -19,26 +16,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.university.soa.bus.Book;
 import com.university.soa.bus.BookingInfo;
 import com.university.soa.bus.MainActivity;
 import com.university.soa.bus.R;
-import com.university.soa.bus.book;
 
 import org.parceler.Parcels;
 
-import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 public class TicketActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView title, tour, dateTime, seatNo, phoneNo, passNo, empName, empCode;
@@ -203,7 +195,7 @@ public class TicketActivity extends AppCompatActivity implements View.OnClickLis
         int id = v.getId();
         switch (id) {
             case R.id.book_again:
-                Intent intent=new Intent(TicketActivity.this,book.class);
+                Intent intent=new Intent(TicketActivity.this, Book.class);
                 startActivity(intent);
                 break;
             case R.id.close_logout:

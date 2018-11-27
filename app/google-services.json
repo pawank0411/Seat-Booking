@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "465759209936",
-    "firebase_url": "https://seatbook-f20b9.firebaseio.com",
-    "project_id": "seatbook-f20b9",
-    "storage_bucket": "seatbook-f20b9.appspot.com"
+    "project_number": "723064252027",
+    "firebase_url": "https://seat-booking-master.firebaseio.com",
+    "project_id": "seat-booking-master",
+    "storage_bucket": "seat-booking-master.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:465759209936:android:fcc52b3988a821bf",
+        "mobilesdk_app_id": "1:723064252027:android:fcc52b3988a821bf",
         "android_client_info": {
           "package_name": "com.university.soa.bus"
         }
       },
       "oauth_client": [
         {
-          "client_id": "465759209936-hsofkkm1u35qln4m4vi1llqur1i082i8.apps.googleusercontent.com",
+          "client_id": "723064252027-nqp68ege1gnp3q0uimkuvskbbgascmg8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.university.soa.bus",
@@ -23,13 +23,13 @@
           }
         },
         {
-          "client_id": "465759209936-ljvp2e1re3405bftjd8c3126jas527i6.apps.googleusercontent.com",
+          "client_id": "723064252027-ojv2l9phiv288mvm3d4hnbuu5v4ctalu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCO1hFhh563nbBzELHCLJVselEuOnl7Rmc"
+          "current_key": "AIzaSyD7GY-R8lViw59AZtENJCe5V7Kn1aNBwvs"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "465759209936-ljvp2e1re3405bftjd8c3126jas527i6.apps.googleusercontent.com",
+              "client_id": "723064252027-ojv2l9phiv288mvm3d4hnbuu5v4ctalu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

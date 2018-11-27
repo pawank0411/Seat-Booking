@@ -9,5 +9,5 @@ import java.util.Set;
 
 public interface OnSeatSelected {
 
-    void onSeatSelected(Set<String> selected, List<Integer> seats);
+    void onSeatSelected(Set<Integer> selected, List<Integer> seats);
 }

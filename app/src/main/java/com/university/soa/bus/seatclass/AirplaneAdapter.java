@@ -21,7 +21,7 @@ import java.util.Set;
 public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
 
     private OnSeatSelected mOnSeatSelected;
-    private Set<String> selected = new HashSet<>(), positions;
+    private Set<Integer> selected = new HashSet<>(), positions;
 
     private static class EdgeViewHolder extends RecyclerView.ViewHolder {
 
@@ -66,12 +66,17 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
 
     private List<AbstractItem> mItems;
 
-    public AirplaneAdapter(Context context, List<AbstractItem> items, Set<String> selected) {
+    public AirplaneAdapter(Context context, List<AbstractItem> items, Set<Integer> selected) {
         mOnSeatSelected = (OnSeatSelected) context;
         mContext = context;
         positions = selected;
         mLayoutInflater = LayoutInflater.from(context);
         mItems = items;
+    }
+
+    public void updateSelected(Set<Integer> selected) {
+        positions = selected;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -104,7 +109,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
         if (type == AbstractItem.TYPE_CENTER) {
             final CenterItem item = (CenterItem) mItems.get(position);
             CenterViewHolder holder = (CenterViewHolder) viewHolder;
-            if(SeatSelection.positions.contains(String.valueOf(position)) && !selected.contains(String.valueOf(position)) ) {
+            if(null != SeatSelection.positions && SeatSelection.positions.contains(position) && !selected.contains(position) ) {
                 item.setSelectable(false);
                 holder.imgSeatSelected.setVisibility(View.VISIBLE);
 
@@ -116,14 +121,16 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                 public void onClick(View v) {
                     if(item.isSelectable()) {
                         toggleSelection(position);
-                        if (isSelected(position)) {
-                            SeatSelection.positions.add(String.valueOf(position));
-                            selected.add(String.valueOf(position));
-                            positions.add(String.valueOf(position));
-                        } else if (SeatSelection.positions.contains(String.valueOf(position))) {
-                            SeatSelection.positions.remove(String.valueOf(position));
-                            selected.remove(String.valueOf(position));
-                            positions.remove(String.valueOf(position));
+                        if (SeatSelection.positions != null) {
+                            if (isSelected(position)) {
+                                SeatSelection.positions.add(position);
+                                selected.add(position);
+                                positions.add(position);
+                            } else if (SeatSelection.positions.contains(position)) {
+                                SeatSelection.positions.remove(position);
+                                selected.remove(position);
+                                positions.remove(position);
+                            }
                         }
                     }
                     else {
@@ -139,7 +146,7 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
         } else if (type == AbstractItem.TYPE_EDGE) {
             final EdgeItem item = (EdgeItem) mItems.get(position);
             EdgeViewHolder holder = (EdgeViewHolder) viewHolder;
-            if(SeatSelection.positions.contains(String.valueOf(position)) && !selected.contains(String.valueOf(position)) ) {
+            if(null != SeatSelection.positions && SeatSelection.positions.contains(position) && !selected.contains(position) ) {
                 item.setSelectable(false);
                 holder.imgSeatSelected.setVisibility(View.VISIBLE);
 
@@ -152,13 +159,13 @@ public class AirplaneAdapter extends SelectableAdapter<RecyclerView.ViewHolder> 
                     if(item.isSelectable()) {
                         toggleSelection(position);
                         if (isSelected(position)) {
-                            SeatSelection.positions.add(String.valueOf(position));
-                            selected.add(String.valueOf(position));
-                            positions.add(String.valueOf(position));
-                        } else if (SeatSelection.positions.contains(String.valueOf(position))) {
-                            SeatSelection.positions.remove(String.valueOf(position));
-                            selected.remove(String.valueOf(position));
-                            positions.remove(String.valueOf(position));
+                            SeatSelection.positions.add(position);
+                            selected.add(position);
+                            positions.add(position);
+                        } else if (SeatSelection.positions.contains(position)) {
+                            SeatSelection.positions.remove(position);
+                            selected.remove(position);
+                            positions.remove(position);
                         }
                     }
                     else {
