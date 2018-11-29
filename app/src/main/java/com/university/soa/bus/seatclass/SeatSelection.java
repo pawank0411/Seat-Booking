@@ -45,7 +45,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
     Toast mToast;
     RelativeLayout loading;
     int bookCount = 0;
-    String str_empcode,emp;
+    String str_empcode,emp,phn;
     AirplaneAdapter adapter;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref;
@@ -73,10 +73,11 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
         mBook.setText(R.string.button2);
         Intent intent = getIntent();
         emp = intent.getStringExtra("empcode");
+        phn = intent.getStringExtra("phonenumber");
      //   Toast.makeText(this, emp, Toast.LENGTH_SHORT).show();
 
         List<AbstractItem> items = new ArrayList<>();
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 33; i++) {
 
             if (i % COLUMNS == 0 || i % COLUMNS == 4) {
                 items.add(new EdgeItem(String.valueOf(i)));
@@ -92,7 +93,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
                 if (bookCount == 0) {
                     showToast("Please Select Seats");
                 } else {
-                    showToast(positions.size() + "seats selected");
+                    //showToast(positions.size() + "seats selected");
                     /*edit.putStringSet(str_empcode, positions);
                     edit.commit();*/
                     // Start NewActivity.class
@@ -102,6 +103,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
                     /*myIntent.putIntegerArrayListExtra("seats",
                             (ArrayList<Integer>) selectedSeats);*/
                     myIntent.putExtra("empcode",emp);
+                    myIntent.putExtra("phonenumber",phn);
                     info.seats = selectedSeats;
                     myIntent.putExtra("info", Parcels.wrap(info));
                     startActivity(myIntent);
@@ -140,7 +142,7 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
                             String seatss = shot.child("Seats").getValue(String.class);
                             String newSeats = seatss.replace("[","")
                                     .replace("]","");
-                            String[] seats = newSeats.split(",");
+                            String[] seats = newSeats.split(", ");
                             for (String seat: seats) {
                                 try {
                                     bookInfo.seats.add(Integer.parseInt(seat));
@@ -149,8 +151,19 @@ public class SeatSelection extends AppCompatActivity implements OnSeatSelected {
                                 }
                             }
                             bookInfo.tour_name = shot.child("Route").getValue(String.class);
-                            bookInfo.date = shot.child("Journey Date").getValue(String.class);
-                            bookInfo.timing = shot.child("Timmings").getValue(String.class);
+                            if(bookInfo.tour_name.equals("Rawan-Bhatapara")){
+                                bookInfo.date = shot.child("Journey Date").getValue(String.class);
+                            }else if(bookInfo.tour_name.equals("Bhatapara-Rawan")){
+                                bookInfo.date = shot.child("Journey Date").getValue(String.class);
+                            }else if(bookInfo.tour_name.equals("Bhatapara-Hirmi-Rawan")){
+                                bookInfo.date = shot.child("Journey Date").getValue(String.class);
+                            }else if(bookInfo.tour_name.equals("Bhatapara-Hirmi-Rawan")){
+                                bookInfo.date = shot.child("Journey Date").getValue(String.class);
+                            }else {
+                                bookInfo.timing = shot.child("Timmings").getValue(String.class);
+                                bookInfo.date = shot.child("Journey Date").getValue(String.class);
+                            }
+
                             if (bookInfo != null && bookInfo.timing.equals(info.timing) &&
                                     bookInfo.date.equals(info.date))
                                 bookings.add(bookInfo);
