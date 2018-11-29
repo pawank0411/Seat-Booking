@@ -1,6 +1,6 @@
 # Seat-Booking
 A mobile application built with Java.
-This is Set Booking app for buses.
+This is Seat Booking app for buses.
 
 ### Requirements
 Java IDE. E.g Android Studio (preferred) or Eclipse
