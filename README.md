@@ -4,10 +4,10 @@ A mobile application built with Java.
 This is Seat Booking app for buses.
 
 ### Requirements
-Java IDE. E.g Android Studio (preferred) or Eclipse
-JDK
-Android Emulator for previewing the app
-Add your firebase account
+* Java IDE. E.g Android Studio (preferred) or Eclipse
+  JDK
+* Android Emulator for previewing the app
+* Add your firebase account
 
 ### Installation
 Download or Clone the repository
