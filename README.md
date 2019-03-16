@@ -7,6 +7,7 @@ This is Seat Booking app for buses.
 Java IDE. E.g Android Studio (preferred) or Eclipse
 JDK
 Android Emulator for previewing the app
+Add your firebase account
 
 ### Installation
 Download or Clone the repository
